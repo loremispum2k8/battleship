@@ -17,6 +17,7 @@
   "homepage": "https://github.com/loremispum2k8/battleship#readme",
   "description": "",
   "devDependencies": {
-    "jest": "^30.2.0"
+    "jest": "^30.2.0",
+    "prettier": "3.6.2"
   }
 }
