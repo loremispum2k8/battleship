@@ -4,7 +4,9 @@
     box-sizing: border-box;
     font-size: Arial;
 }
-
+body{
+    padding-top: 40px;
+}
 
 
 .map{
@@ -21,10 +23,10 @@
 .square{
     height: 33px;
     width: 33px;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
     background-color: rgb(111, 187, 231);
 }
 .square:hover{
-    border: 2px solid black;
+    border: 2px solid rgb(255, 255, 255);
     cursor: pointer;
 }

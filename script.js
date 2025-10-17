@@ -34,6 +34,7 @@ class Gameboard {
   constructor() {
     this.criticalShots = [];
     this.nonCriticalShots = [];
+    this.historyShots = [];
     this.ships = {
       carrier: new Ship(5, "carrier"),
       battleship: new Ship(4, "battleship"),
@@ -51,17 +52,31 @@ class Gameboard {
   }
 
   placeBoat(ship, coordonateStr) {
+    let historyShotsPass = true;
+
+    let coordonate = [];
+    coordonate.push(coordonateStr[0]);
+    coordonate.push(coordonateStr.slice(1));
+    console.log(coordonate);
+
+    for( let position of this.historyShots ){
+      if(position[0] === coordonate[0] && position[1] === coordonate[1]){
+        historyShotsPass = false;
+        console.log('Repeating position found')
+      }
+    } 
+    console.log(historyShotsPass)
+    
     for (let element in this.ships) {
       if (
         ship === element &&
-        this.ships[element].coordonates.length < this.ships[element].length
+        this.ships[element].coordonates.length < this.ships[element].length 
+        && historyShotsPass === true
       ) {
-        let coordonate = [];
-        coordonate.push(coordonateStr[0]);
-        coordonate.push(coordonateStr.slice(1));
-        console.log(coordonate);
+        console.log('passed')
         this.ships[element].coordonates.push(coordonate);
         this.criticalShots.push(coordonate);
+        this.historyShots.push(coordonate)
 
         for (let position of this.nonCriticalShots) {
           if (position[0] === coordonate[0] && position[1] === coordonate[1]) {
@@ -73,6 +88,7 @@ class Gameboard {
         }
       }
     }
+    console.log(this)
   }
   recieveAttack(x, y) {
     //sends hit to the ship or the missing shot
@@ -92,6 +108,10 @@ let computer = new Player();
 me.gameboard.placeBoat("submarine", "A10");
 me.gameboard.placeBoat("submarine", "A9");
 me.gameboard.placeBoat("submarine", "A8");
+me.gameboard.placeBoat("submarine", "A7");
+me.gameboard.placeBoat("submarine", "A8");
+me.gameboard.placeBoat("cruiser", "J5");
+me.gameboard.placeBoat("cruiser", "J5");
 console.log(me.gameboard);
 
 let squares = document.querySelectorAll(".square");
