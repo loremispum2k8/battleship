@@ -1,0 +1,4 @@
+1. Placing boats
+    > Make the algorithm for correct boat placement:
+        >> Vertical and horizontal, not oblique
+        >> Vertical and horizontal mandatory based on past 2 coordonates 
