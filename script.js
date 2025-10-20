@@ -66,7 +66,39 @@ class Gameboard {
       this.ships[ship].allowedMoves.push(coordonate);
       console.log(this.ships[ship].allowedMoves);
     }
-    if (this.ships[ship].coordonates.length === 1) {
+    if (this.ships[ship].coordonates.length === 2){
+      if(this.ships[ship].coordonates[0][0] !== this.ships[ship].coordonates[1][0] && this.ships[ship].coordonates[0][1] === this.ships[ship].coordonates[1][1]){
+        let orderedTwoMoves = this.ships[ship].coordonates.sort((a,b) => a[0].charCodeAt()-b[0].charCodeAt())
+        this.ships[ship].allowedMoves = []
+        
+        if(orderedTwoMoves[0][0].charCodeAt()-1 >= 65){
+          this.ships[ship].allowedMoves.push([String.fromCharCode(orderedTwoMoves[0][0].charCodeAt()-1),orderedTwoMoves[0][1]])
+          //console.log('Possible move 1: ', [String.fromCharCode(orderedTwoMoves[0][0].charCodeAt()-1),orderedTwoMoves[0][1]])
+        }
+
+
+        if(orderedTwoMoves[1][0].charCodeAt()+1 <= 75){
+          this.ships[ship].allowedMoves.push([String.fromCharCode(orderedTwoMoves[1][0].charCodeAt()+1),orderedTwoMoves[1][1]])
+          //console.log('Possible move 2: ', [String.fromCharCode(orderedTwoMoves[1][0].charCodeAt()+1),orderedTwoMoves[1][1]])
+        }
+
+
+        console.log(this.ships[ship].allowedMoves)
+      }
+      
+      else if(this.ships[ship].coordonates[0][0] === this.ships[ship].coordonates[1][0] && this.ships[ship].coordonates[0][1] !== this.ships[ship].coordonates[1][1]){
+        let orderedTwoMoves = this.ships[ship].coordonates.sort((a,b) => a[0].charCodeAt()-b[0].charCodeAt())
+        this.ships[ship].allowedMoves = []
+        if(Number(orderedTwoMoves[0][1])-1 >= 1){
+          this.ships[ship].allowedMoves.push([orderedTwoMoves[0][0],String(Number(orderedTwoMoves[0][1])-1)])
+          //console.log('Possible move 1: ', [orderedTwoMoves[0][0],String(Number(orderedTwoMoves[0][1])-1)])
+        }
+        if(Number(orderedTwoMoves[1][1])+1 <= 10){
+          this.ships[ship].allowedMoves.push([orderedTwoMoves[1][0],String(Number(orderedTwoMoves[1][1])+1)])
+          //console.log('Possible move 2: ', [orderedTwoMoves[1][0],String(Number(orderedTwoMoves[1][1])+1)])
+        }
+        console.log(this.ships[ship].allowedMoves)
+      }
     }
     // CONSTRUCTING POSSIBLE MOVES
 
@@ -160,8 +192,8 @@ class Gameboard {
         }
 
         // [ L-1 ; N - 1 ]
-        if (Number(num) - 1 <= 0) {
-          this.ships[ship].allowedMoves[4] = [letter, "0"];
+        if (Number(num) - 1 <= 1) {
+          this.ships[ship].allowedMoves[4] = [letter, "1"];
         } else {
           this.ships[ship].allowedMoves[4] = [
             letter,
@@ -199,9 +231,10 @@ let computer = new Player();
 
 
 // TEST SITE
-me.gameboard.placeBoat("submarine", "C6");
-me.gameboard.placeBoat("submarine", "C7");
-
+me.gameboard.placeBoat("submarine", "C2");
+me.gameboard.placeBoat("submarine", "B2");
+me.gameboard.placeBoat("submarine", "J2");
+me.gameboard.placeBoat("carrier", "A1");
 
 
 
