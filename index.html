@@ -140,7 +140,50 @@
         
         <div class="placingCoordonatesContainer">
           <div class="coordonateTitle">Coordonates</div>
-          <div class="placeCoordonatesCard"></div>
+          <div class="placeCoordonatesCard">
+            <div class="coordonatesRow">
+              <p class="coordonatesBoatName">Carrier</p>
+              <div class="coordonatesRowInputs">
+                <input class="coordonateInput firstInput" id="carrier" type="text" maxlength="2" pattern="[A-J][10|1-9]">
+                <input class="coordonateInput" id="carrier" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+                <input class="coordonateInput" id="carrier" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+                <input class="coordonateInput" id="carrier" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+                <input class="coordonateInput" id="carrier" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+              </div>
+            </div>
+            <div class="coordonatesRow">
+              <p class="coordonatesBoatName">Battleships</p>
+              <div class="coordonatesRowInputs">
+                <input class="coordonateInput firstInput" id="battleship" type="text" maxlength="2"pattern="[A-J][10|1-9]">
+                <input class="coordonateInput" id="battleship" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+                <input class="coordonateInput" id="battleship" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]"disabled>
+                <input class="coordonateInput" id="battleship" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+              </div>
+            </div>
+            <div class="coordonatesRow">
+              <p class="coordonatesBoatName">Cruiser</p>
+              <div class="coordonatesRowInputs">
+                <input class="coordonateInput firstInput" id="cruiser" type="text" maxlength="2" pattern="[A-J][10|1-9]">
+                <input class="coordonateInput" id="cruiser" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+                <input class="coordonateInput" id="cruiser" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+              </div>
+            </div>
+            <div class="coordonatesRow">
+              <p class="coordonatesBoatName">Submarine</p>
+              <div class="coordonatesRowInputs">
+                <input class="coordonateInput firstInput" id="submarine" type="text" maxlength="2" pattern="[A-J][10|1-9]">
+                <input class="coordonateInput" id="submarine" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+                <input class="coordonateInput" id="submarine" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+              </div>
+            </div>
+            <div class="coordonatesRow">
+              <p class="coordonatesBoatName">Destroyer</p>
+              <div class="coordonatesRowInputs">
+                <input class="coordonateInput firstInput" id="destroyer" type="text" maxlength="2" pattern="[A-J][10|1-9]">
+                <input class="coordonateInput" id="destroyer" type="text" maxlength="2" placeholder="-" pattern="[A-J][10|1-9]" disabled>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="mapPlacingContainer">
@@ -172,7 +215,7 @@
             </div>
             <div class="map-placing">
               <div class="row-placing">
-                <div class="square-placing" id="A1"></div>
+                <div class="square-placing" id="A1" style="border-radius: 8px 0px 0px 0px;"></div>
                 <div class="square-placing" id="B1"></div>
                 <div class="square-placing" id="C1"></div>
                 <div class="square-placing" id="D1"></div>
@@ -181,7 +224,7 @@
                 <div class="square-placing" id="G1"></div>
                 <div class="square-placing" id="H1"></div>
                 <div class="square-placing" id="I1"></div>
-                <div class="square-placing" id="J1"></div>
+                <div class="square-placing" id="J1" style="border-radius: 0px 8px 0px 0px;"></div>
               </div>
               <div class="row-placing">
                 <div class="square-placing" id="A2"></div>
@@ -280,7 +323,7 @@
                 <div class="square-placing" id="J9"></div>
               </div>
               <div class="row-placing">
-                <div class="square-placing" id="A10"></div>
+                <div class="square-placing" id="A10" style="border-radius: 0px 0px 0px 8px;"></div>
                 <div class="square-placing" id="B10"></div>
                 <div class="square-placing" id="C10"></div>
                 <div class="square-placing" id="D10"></div>
@@ -289,7 +332,7 @@
                 <div class="square-placing" id="G10"></div>
                 <div class="square-placing" id="H10"></div>
                 <div class="square-placing" id="I10"></div>
-                <div class="square-placing" id="J10"></div>
+                <div class="square-placing" id="J10" style="border-radius: 0px 0px 8px 0px;"></div>
               </div>
             </div>
             <div class="mapPlacingSide">
@@ -322,7 +365,38 @@
 
         <div class="placingBoatsContainer">
           <div class="boatsTitle">My Boats</div>
-          <div class="placeBoatsCard"></div>
+          <div class="placeBoatsCard">
+            <div class="placeBoatsTableHeaders">
+              <p class="tableHeader">Type</p>
+              <p class="tableHeader">Length</p>
+              <p class="tableHeader">Quantity</p>
+            </div>
+            <div class="tableRow carrierRow">
+              <p class="tableType">Carrier</p>
+              <p class="tableLength">5</p>
+              <p class="tableQuantity">0</p>
+            </div>
+            <div class="tableRow battleshipRow">
+              <p class="tableType">Battleship</p>
+              <p class="tableLength">4</p>
+              <p class="tableQuantity">0</p>
+            </div>
+            <div class="tableRow cruisedRow">
+              <p class="tableType">Cruiser</p>
+              <p class="tableLength">3</p>
+              <p class="tableQuantity">0</p>
+            </div>
+            <div class="tableRow submarineRow">
+              <p class="tableType">Submarine</p>
+              <p class="tableLength">3</p>
+              <p class="tableQuantity">0</p>
+            </div>
+            <div class="tableRow destroyerRow">
+              <p class="tableType">Destroyer</p>
+              <p class="tableLength">2</p>
+              <p class="tableQuantity">0</p>
+            </div>
+          </div>
         </div>
 
       </div>

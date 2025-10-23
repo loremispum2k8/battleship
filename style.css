@@ -2,8 +2,21 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: arial;
+    font-family: "InterMedium";
 }
+@font-face{
+    font-family: "InterMedium";
+    src: url(fonts/Inter_18pt-Medium.ttf);
+}
+@font-face{
+    font-family: "InterSemiBold";
+    src: url(fonts/Inter_18pt-SemiBold.ttf);
+}
+@font-face{
+    font-family: "InterRegular";
+    src: url(fonts/Inter_18pt-Regular.ttf);
+}
+
 body{
     width: 100dvw;
     height: 100dvh;  
@@ -22,11 +35,78 @@ body{
 .gameTitle{
     font-size: 50px;
     font-weight: bold;
+    color: transparent;
+    background-image: linear-gradient(to right, #c3ddfb 0%, #6494FF 50%, #c3ddfb 100%);
+    background-clip: text;
 }
 .placingContainerMiddle{
+    margin-left: -43px;
     display: flex;
     flex-direction: row;
     gap: 40px;
+}
+.placingCoordonatesContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+.coordonateTitle{
+    font-size: 20px;
+}
+.placeCoordonatesCard{
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0px 0px 0px 0.5px #B7B7B7;
+    width: 314px;
+    gap: 10px;
+}
+.coordonatesRow{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.coordonatesRowInputs{
+    display: flex;
+    border-radius: 8px;
+    flex-direction: row;
+    align-items: center;
+    padding: 3px;
+    gap: 4px;
+    background-color: #E6E6E6;
+}
+.coordonateInput{
+    border-radius: 8px;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    box-shadow: 0px 0px 0px 0.5px #B7B7B7;
+    font-size: 14px;
+    color: #444444;
+    cursor: not-allowed;
+}
+.coordonateInput::placeholder{
+    color: #B7B7B7;
+}
+.firstInput{
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 2px 2px  2px 0px hsla(0, 0%, 0%, 0.10);
+}
+.firstInput:hover{
+    outline: 2px solid #5986E9;
+}
+.firstInput:focus{
+    outline: 2px solid #5986E9;
 }
 .mapPlacingContainer{
     display: flex;
@@ -36,14 +116,17 @@ body{
     gap: 4px;
 }
 .mapPlacingTopBottom .mapCoordonate{
-    text-align: ce;
+    text-align: center;
+    font-family: "InterRegular";
     width: 10px;
 }
 .mapPlacingTopBottom{
+    border-radius: 4px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    font-family: "InterRegular";
     width: 330px;
     padding: 4px 0px;
     box-shadow: 0px 0px 0px 0.5px #B7B7B7;
@@ -55,12 +138,14 @@ body{
     gap: 4px;
 }
 .mapPlacingSide{
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     height: 330px;
     padding: 0px 4px;
+    font-family: "InterRegular";
     box-shadow: 0px 0px 0px 0.5px #B7B7B7;
 }
 
@@ -80,4 +165,79 @@ body{
     width: 33px;
     box-shadow: 0px 0px 0px 0.5px white;
     background-color: #5986E9;
+}
+
+.placingBoatsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.boatsTitle{
+    font-size: 20px;
+}
+.placeBoatsCard{
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 271px;
+    border-radius: 28px;
+    box-shadow: 0px 0px 0px 0.5px #B7B7B7;
+}
+.placeBoatsTableHeaders{
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 4px;
+    background-color: #E6E6E6;
+    height: 37px;
+    padding: 3px;
+}
+.tableHeader{
+    border-radius: 8px;
+    font-family: "InterSemiBold";
+    flex: 1;
+    font-size: 14px;
+    color: #444444;
+    text-align: center;
+    box-shadow: 2px 2px  2px 0px hsla(0, 0%, 0%, 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: white;
+}
+.tableRow{
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 33px;
+    font-size: 14px;
+    box-shadow: 0px 0px 0px 0.5px #B7B7B7;
+    padding: 0px 20px;
+}
+.tableType{
+    width: 72px;
+}
+.tableQuantity{
+    color: #B7B7B7;
+}
+
+.placingDoneButton{
+    width: 90px;
+    height: 37px;
+    font-family: "InterMedium";
+    background-color: white;
+    color: #B7B7B7;
+    border: 1px solid #B7B7B7;
+    border-radius: 30px;
+    cursor: not-allowed;
 }
