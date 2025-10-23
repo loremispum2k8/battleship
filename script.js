@@ -56,7 +56,7 @@ class Gameboard {
     console.log(coordonate);
 
     // CONSTRUCTING POSSIBLE MOVES
-    if (this.ships[ship].coordonates.length === 0) {
+    if (this.ships[ship].coordonates.length === 0 && ((coordonate[0].charCodeAt() >= 65 && coordonate[0].charCodeAt() < 75) || (coordonate[0].charCodeAt() > 65 && coordonate[0].charCodeAt() <= 75)) && (Number(coordonate[1]) >= 1 || Number(coordonate[1]) <= 10)){
       this.ships[ship].allowedMoves.push(coordonate);
       console.log(this.ships[ship].allowedMoves);
     } else if (this.ships[ship].coordonates.length === 2) {
@@ -110,26 +110,31 @@ class Gameboard {
         console.log("Bigger move: ", Number(orderedTwoMoves[1][1]) + 1);
         console.log(this.ships[ship].allowedMoves);
       }
+
+      //FIX THIS SHIT HERE
     } else if (this.ships[ship].coordonates.length >= 3) {
-      let ordersThreeOrMoreMoves = this.ships[ship].coordonates.sort(
-        (a, b) => a[0].charCodeAt() - b[0].charCodeAt()
-      );
+
+      console.log(this.ships[ship].coordonates)
       this.ships[ship].allowedMoves = [];
 
       let direction;
-      let firstLetter = ordersThreeOrMoreMoves[0][0];
-      let firstNumber = ordersThreeOrMoreMoves[0][1];
-      for (let move of ordersThreeOrMoreMoves) {
-        if (move[0] !== firstLetter) {
-          direction = "row";
-        }
-      }
-      for (let move of ordersThreeOrMoreMoves) {
-        if (move[1] !== firstNumber) {
-          direction = "column";
-        }
+      let ordersThreeOrMoreMoves
+
+      if(this.ships[ship].coordonates[0][0] === this.ships[ship].coordonates[1][0]){
+        direction = "column";
+        ordersThreeOrMoreMoves = this.ships[ship].coordonates.sort(
+           (a, b) => a[1] - b[1]
+        );
+      }else if(this.ships[ship].coordonates[0][1] === this.ships[ship].coordonates[1][1]){
+        direction = "row";
+        ordersThreeOrMoreMoves = this.ships[ship].coordonates.sort(
+           (a, b) => a[0].charCodeAt() - b[0].charCodeAt()
+        );
       }
 
+      console.log(direction)
+      console.log(this.ships[ship].coordonates)
+      console.log(ordersThreeOrMoreMoves)
       // CONTINUE
       if (direction === "row") {
         if (ordersThreeOrMoreMoves[0][0].charCodeAt() - 1 >= 65) {
@@ -155,18 +160,19 @@ class Gameboard {
           ]);
         }
         console.log(this.ships[ship].allowedMoves);
-      } else if (direction === "column") {
+      } 
+      
+      else if (direction === "column") {
         if (Number(ordersThreeOrMoreMoves[0][1]) - 1 >= 1) {
+          console.log(Number(ordersThreeOrMoreMoves[0][1]) - 1)
           this.ships[ship].allowedMoves.push([
             ordersThreeOrMoreMoves[0][0],
             String(Number(ordersThreeOrMoreMoves[0][1]) - 1),
           ]);
         }
         if (
-          Number(ordersThreeOrMoreMoves[ordersThreeOrMoreMoves.length - 1][1]) +
-            1 <=
-          10
-        ) {
+          Number(ordersThreeOrMoreMoves[ordersThreeOrMoreMoves.length - 1][1]) + 1 <= 10) {
+            console.log(Number(ordersThreeOrMoreMoves[ordersThreeOrMoreMoves.length - 1][1]) + 1)
           this.ships[ship].allowedMoves.push([
             ordersThreeOrMoreMoves[0][0],
             String(
@@ -236,6 +242,7 @@ class Gameboard {
 
       console.log("Adding 4 more possitions");
       if (this.ships[ship].coordonates.length === 1) {
+        console.log('Adding 1 move')
         let letter = this.ships[ship].coordonates[0][0];
         let num = this.ships[ship].coordonates[0][1];
 
@@ -363,27 +370,38 @@ let computer = new Player();
 // TEST SITE
 
 // -> Placing of the boats is done with input events
-// me.gameboard.placeBoat("carrier", "B1");
-// me.gameboard.placeBoat("carrier", "C1");
-// me.gameboard.placeBoat("carrier", "D1");
-// me.gameboard.placeBoat("carrier", "A1");
-// me.gameboard.placeBoat("carrier", "E1");
-// me.gameboard.placeBoat("submarine", "J4");
-// me.gameboard.placeBoat("submarine", "J5");
-// me.gameboard.placeBoat("submarine", "J6");
-// me.gameboard.placeBoat("battleship", "C5");
-// me.gameboard.placeBoat("battleship", "D5");
-// me.gameboard.placeBoat("battleship", "E5");
-// me.gameboard.placeBoat("battleship", "F5");
-// me.gameboard.placeBoat("cruiser", "H2");
-// me.gameboard.placeBoat("cruiser", "H3");
-// me.gameboard.placeBoat("cruiser", "H4");
-// me.gameboard.placeBoat("destroyer", "J7");
-// me.gameboard.placeBoat("destroyer", "J8");
+// me.gameboard.placeBoat("carrier", "A5");
+// me.gameboard.placeBoat("carrier", "A4");
+// me.gameboard.placeBoat("carrier", "A3");
+// me.gameboard.placeBoat("carrier", "A6");
+// me.gameboard.placeBoat("carrier", "A7");
 
 // DOM
-let squaresPlayer = document.querySelector(".squarePlayer")
-let squaresComputer = document.querySelectorAll(".squareComputer");
-squaresPlayer.forEach((square) =>
-  square.addEventListener("click", () => me.gameboard.recieveAttack(square))
-);
+//let squaresPlayer = document.querySelector(".squarePlayer")
+//let squaresComputer = document.querySelectorAll(".squareComputer");
+//squaresPlayer.forEach((square) =>
+//  square.addEventListener("click", () => me.gameboard.recieveAttack(square))
+//);
+
+
+let placingMapCoordonates = document.querySelectorAll('.square-placing')
+let coordonateInputs = document.querySelectorAll('.coordonateInput')
+coordonateInputs.forEach((input)=>{
+  input.addEventListener('change',()=>{
+    let validatedCoordonate = false;
+    console.log(input.value)
+    console.log(input.id)
+    me.gameboard.placeBoat(input.id, input.value);
+    console.log('---> ', me.gameboard)
+    placingMapCoordonates.forEach((coordonate)=>{
+      for(let leftMove of me.gameboard.historyShots){
+        if(leftMove.join('') === input.value){
+          validatedCoordonate = true;
+        }
+      }
+      if(coordonate.id === input.value && validatedCoordonate){
+        console.log(coordonate.classList.add('squareInputed'))
+      }
+    })
+  })
+})
