@@ -405,3 +405,57 @@ coordonateInputs.forEach((input)=>{
     })
   })
 })
+
+coordonateInputs.forEach((input)=>{
+  input.addEventListener('click',()=>{
+    if(input.value !== ""){
+      let pastValue = [input.value[0],input.value.slice(1)];
+      input.value = null
+      placingMapCoordonates.forEach((coordonate)=>{
+            if(coordonate.id === pastValue.join('')){
+              coordonate.classList.remove('squareInputed')
+            }
+      })
+      
+      for(let criticalShot of me.gameboard.criticalShots){
+        if(criticalShot.join('') === pastValue.join('')){
+          me.gameboard.criticalShots.splice(me.gameboard.criticalShots.indexOf(criticalShot),1)
+        }
+      }
+      for(let historyShot of me.gameboard.historyShots){
+        if(historyShot.join('') === pastValue.join('')){
+          me.gameboard.historyShots.splice(me.gameboard.historyShots.indexOf(historyShot),1)
+        }
+      }
+      for(let nonCriticalShot of me.gameboard.nonCriticalShots['Row'+ pastValue[1]]){
+        if(pastValue[0] === 'A'){
+          me.gameboard.nonCriticalShots['Row'+ pastValue[1]].unshift(pastValue)
+          break;
+        }
+        
+        else if(pastValue[0] === 'J'){
+          me.gameboard.nonCriticalShots['Row'+ pastValue[1]].push(pastValue)
+          break;
+        }
+        
+        else{
+          if(nonCriticalShot[0].charCodeAt() === pastValue[0].charCodeAt()+1){
+            me.gameboard.nonCriticalShots['Row'+ pastValue[1]].splice(me.gameboard.nonCriticalShots['Row'+ pastValue[1]].indexOf(nonCriticalShot), 0 ,pastValue)
+            break;
+          }
+        }
+      }
+
+      console.log(me.gameboard.ships[input.id])
+      for(let coordonate of me.gameboard.ships[input.id].coordonates){
+        if(coordonate.join('') === pastValue.join('')){
+          me.gameboard.ships[input.id].coordonates.splice(me.gameboard.ships[input.id].coordonates.indexOf(coordonate),1)
+
+          // Rewrite possible moves based on new length
+          me.gameboard.ships[input.id].allowedMoves = []
+        }
+      }
+
+    }
+  })
+})

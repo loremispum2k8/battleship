@@ -1,4 +1,2 @@
-1. Placing boats
-    > Make the algorithm for correct boat placement:
-        >> Vertical and horizontal, not oblique
-        >> Vertical and horizontal mandatory based on past 2 coordonates 
+Clicking on the last input available leads to the coordonate disapearing and being reutrn to all the arrays
+> criticalShots
