@@ -383,6 +383,20 @@ class Player {
 let me = new Player();
 let computer = new Player();
 
+function finishMap(){
+  let placingDoneButton = document.querySelector('.placingDoneButton')
+  let allCoordonatesPlaced = true
+  for(let ship in me.gameboard.ships){
+    if(me.gameboard.ships[ship].coordonates.length !== me.gameboard.ships[ship].length){
+      allCoordonatesPlaced = false;
+    }
+  }
+  if(allCoordonatesPlaced){
+    console.log('allPlaced')
+    placingDoneButton.classList.add('mapDone')
+  }
+}
+
 let tableRow = document.querySelectorAll(".tableRow");
 let placingMapCoordonates = document.querySelectorAll(".square-placing");
 let coordonateInputs = document.querySelectorAll(".coordonateInput");
@@ -391,9 +405,11 @@ tableQuantity = document.querySelectorAll('.tableQuantity')
 coordonateInputs.forEach((input) => {
   input.addEventListener("change", () => {
     let validatedCoordonate = false;
+    input.value = input.value.toUpperCase()
     console.log(input.value);
     console.log(input.id);
     me.gameboard.placeBoat(input.id, input.value);
+    finishMap()
     console.log("---> ", me.gameboard);
     placingMapCoordonates.forEach((coordonate) => {
       for (let leftMove of me.gameboard.historyShots) {
@@ -647,3 +663,6 @@ coordonateInputs.forEach((input) => {
     }
   });
 });
+
+
+
