@@ -56,7 +56,13 @@ class Gameboard {
     console.log(coordonate);
 
     // CONSTRUCTING POSSIBLE MOVES
-    if (this.ships[ship].coordonates.length === 0 && ((coordonate[0].charCodeAt() >= 65 && coordonate[0].charCodeAt() < 75) || (coordonate[0].charCodeAt() > 65 && coordonate[0].charCodeAt() <= 75)) && (Number(coordonate[1]) >= 1 || Number(coordonate[1]) <= 10)){
+    if (
+      this.ships[ship].coordonates.length === 0 &&
+      ((coordonate[0].charCodeAt() >= 65 && coordonate[0].charCodeAt() < 75) ||
+        (coordonate[0].charCodeAt() > 65 &&
+          coordonate[0].charCodeAt() <= 75)) &&
+      (Number(coordonate[1]) >= 1 || Number(coordonate[1]) <= 10)
+    ) {
       this.ships[ship].allowedMoves.push(coordonate);
       console.log(this.ships[ship].allowedMoves);
     } else if (this.ships[ship].coordonates.length === 2) {
@@ -113,28 +119,33 @@ class Gameboard {
 
       //FIX THIS SHIT HERE
     } else if (this.ships[ship].coordonates.length >= 3) {
-
-      console.log(this.ships[ship].coordonates)
+      console.log(this.ships[ship].coordonates);
       this.ships[ship].allowedMoves = [];
 
       let direction;
-      let ordersThreeOrMoreMoves
+      let ordersThreeOrMoreMoves;
 
-      if(this.ships[ship].coordonates[0][0] === this.ships[ship].coordonates[1][0]){
+      if (
+        this.ships[ship].coordonates[0][0] ===
+        this.ships[ship].coordonates[1][0]
+      ) {
         direction = "column";
         ordersThreeOrMoreMoves = this.ships[ship].coordonates.sort(
-           (a, b) => a[1] - b[1]
+          (a, b) => a[1] - b[1]
         );
-      }else if(this.ships[ship].coordonates[0][1] === this.ships[ship].coordonates[1][1]){
+      } else if (
+        this.ships[ship].coordonates[0][1] ===
+        this.ships[ship].coordonates[1][1]
+      ) {
         direction = "row";
         ordersThreeOrMoreMoves = this.ships[ship].coordonates.sort(
-           (a, b) => a[0].charCodeAt() - b[0].charCodeAt()
+          (a, b) => a[0].charCodeAt() - b[0].charCodeAt()
         );
       }
 
-      console.log(direction)
-      console.log(this.ships[ship].coordonates)
-      console.log(ordersThreeOrMoreMoves)
+      console.log(direction);
+      console.log(this.ships[ship].coordonates);
+      console.log(ordersThreeOrMoreMoves);
       // CONTINUE
       if (direction === "row") {
         if (ordersThreeOrMoreMoves[0][0].charCodeAt() - 1 >= 65) {
@@ -160,19 +171,24 @@ class Gameboard {
           ]);
         }
         console.log(this.ships[ship].allowedMoves);
-      } 
-      
-      else if (direction === "column") {
+      } else if (direction === "column") {
         if (Number(ordersThreeOrMoreMoves[0][1]) - 1 >= 1) {
-          console.log(Number(ordersThreeOrMoreMoves[0][1]) - 1)
+          console.log(Number(ordersThreeOrMoreMoves[0][1]) - 1);
           this.ships[ship].allowedMoves.push([
             ordersThreeOrMoreMoves[0][0],
             String(Number(ordersThreeOrMoreMoves[0][1]) - 1),
           ]);
         }
         if (
-          Number(ordersThreeOrMoreMoves[ordersThreeOrMoreMoves.length - 1][1]) + 1 <= 10) {
-            console.log(Number(ordersThreeOrMoreMoves[ordersThreeOrMoreMoves.length - 1][1]) + 1)
+          Number(ordersThreeOrMoreMoves[ordersThreeOrMoreMoves.length - 1][1]) +
+            1 <=
+          10
+        ) {
+          console.log(
+            Number(
+              ordersThreeOrMoreMoves[ordersThreeOrMoreMoves.length - 1][1]
+            ) + 1
+          );
           this.ships[ship].allowedMoves.push([
             ordersThreeOrMoreMoves[0][0],
             String(
@@ -187,14 +203,14 @@ class Gameboard {
     }
     // CONSTRUCTING POSSIBLE MOVES
 
-    // Check for repeating coordonate - SEEMS GOOD
+    // Check for repeating coordonate
     for (let position of this.historyShots) {
       if (position[0] === coordonate[0] && position[1] === coordonate[1]) {
         historyShotsPass = false;
         console.log("Repeating position found");
       }
     }
-    // Check for repeating coordonate - SEEMS GOOD
+    // Check for repeating coordonate
 
     // Check for possibleMove
     for (let possibleMove of this.ships[ship].allowedMoves) {
@@ -242,7 +258,7 @@ class Gameboard {
 
       console.log("Adding 4 more possitions");
       if (this.ships[ship].coordonates.length === 1) {
-        console.log('Adding 1 move')
+        console.log("Adding 1 move");
         let letter = this.ships[ship].coordonates[0][0];
         let num = this.ships[ship].coordonates[0][1];
 
@@ -367,95 +383,267 @@ class Player {
 let me = new Player();
 let computer = new Player();
 
-// TEST SITE
+let tableRow = document.querySelectorAll(".tableRow");
+let placingMapCoordonates = document.querySelectorAll(".square-placing");
+let coordonateInputs = document.querySelectorAll(".coordonateInput");
+tableQuantity = document.querySelectorAll('.tableQuantity')
 
-// -> Placing of the boats is done with input events
-// me.gameboard.placeBoat("carrier", "A5");
-// me.gameboard.placeBoat("carrier", "A4");
-// me.gameboard.placeBoat("carrier", "A3");
-// me.gameboard.placeBoat("carrier", "A6");
-// me.gameboard.placeBoat("carrier", "A7");
-
-// DOM
-//let squaresPlayer = document.querySelector(".squarePlayer")
-//let squaresComputer = document.querySelectorAll(".squareComputer");
-//squaresPlayer.forEach((square) =>
-//  square.addEventListener("click", () => me.gameboard.recieveAttack(square))
-//);
-
-
-let placingMapCoordonates = document.querySelectorAll('.square-placing')
-let coordonateInputs = document.querySelectorAll('.coordonateInput')
-coordonateInputs.forEach((input)=>{
-  input.addEventListener('change',()=>{
+coordonateInputs.forEach((input) => {
+  input.addEventListener("change", () => {
     let validatedCoordonate = false;
-    console.log(input.value)
-    console.log(input.id)
+    console.log(input.value);
+    console.log(input.id);
     me.gameboard.placeBoat(input.id, input.value);
-    console.log('---> ', me.gameboard)
-    placingMapCoordonates.forEach((coordonate)=>{
-      for(let leftMove of me.gameboard.historyShots){
-        if(leftMove.join('') === input.value){
+    console.log("---> ", me.gameboard);
+    placingMapCoordonates.forEach((coordonate) => {
+      for (let leftMove of me.gameboard.historyShots) {
+        if (leftMove.join("") === input.value) {
           validatedCoordonate = true;
         }
       }
-      if(coordonate.id === input.value && validatedCoordonate){
-        console.log(coordonate.classList.add('squareInputed'))
-      }
-    })
-  })
-})
 
-coordonateInputs.forEach((input)=>{
-  input.addEventListener('click',()=>{
-    if(input.value !== ""){
-      let pastValue = [input.value[0],input.value.slice(1)];
-      input.value = null
-      placingMapCoordonates.forEach((coordonate)=>{
-            if(coordonate.id === pastValue.join('')){
-              coordonate.classList.remove('squareInputed')
+      if (
+        coordonate.id === input.value &&
+        validatedCoordonate
+      ) {
+        console.log(coordonate.classList.add("squareInputed"));
+        for (let row of tableRow) {
+          if (row.children[0].textContent.toLowerCase() === input.id) {
+            console.log(me.gameboard.ships[input.id].coordonates.length === me.gameboard.ships[input.id].length)
+            if (
+              me.gameboard.ships[input.id].coordonates.length ===
+              me.gameboard.ships[input.id].length
+            ) {
+              console.log('ADD BLUE ')
+                row.classList.add('blueBorder');
+                row.classList.remove('redBorder');
+                row.classList.remove('greyBorder');
+                row.children[0].style.color = '#5986E9'
+                row.children[1].style.color = '#5986E9'
+                row.children[2].style.color = '#5986E9'   
+                row.children[2].textContent = "1"
+                row.children[2].classList.remove('grey')
             }
-      })
-      
-      for(let criticalShot of me.gameboard.criticalShots){
-        if(criticalShot.join('') === pastValue.join('')){
-          me.gameboard.criticalShots.splice(me.gameboard.criticalShots.indexOf(criticalShot),1)
+            else if (
+              me.gameboard.ships[input.id].coordonates.length >= 1 &&
+              me.gameboard.ships[input.id].coordonates.length < 5
+            ) {
+              console.log('addingred')
+                row.classList.add('redBorder');
+                row.classList.remove('greyBorder');
+                row.classList.remove('blueBorder');
+                row.children[0].style.color = '#BC4B4B'
+                row.children[1].style.color = '#BC4B4B'
+                row.children[2].classList.add('grey')
+                row.children[2].textContent = "0"
+                row.children[2].removeAttribute('style')
+            } 
+          }
         }
       }
-      for(let historyShot of me.gameboard.historyShots){
-        if(historyShot.join('') === pastValue.join('')){
-          me.gameboard.historyShots.splice(me.gameboard.historyShots.indexOf(historyShot),1)
+    });
+  });
+});
+
+coordonateInputs.forEach((input) => {
+  input.addEventListener("click", () => {
+    if (input.value !== "") {
+      let pastValue = [input.value[0], input.value.slice(1)];
+      input.value = null;
+
+      for (let criticalShot of me.gameboard.criticalShots) {
+        if (criticalShot.join("") === pastValue.join("")) {
+          me.gameboard.criticalShots.splice(
+            me.gameboard.criticalShots.indexOf(criticalShot),
+            1
+          );
         }
       }
-      for(let nonCriticalShot of me.gameboard.nonCriticalShots['Row'+ pastValue[1]]){
-        if(pastValue[0] === 'A'){
-          me.gameboard.nonCriticalShots['Row'+ pastValue[1]].unshift(pastValue)
-          break;
+      for (let historyShot of me.gameboard.historyShots) {
+        if (historyShot.join("") === pastValue.join("")) {
+          me.gameboard.historyShots.splice(
+            me.gameboard.historyShots.indexOf(historyShot),
+            1
+          );
         }
-        
-        else if(pastValue[0] === 'J'){
-          me.gameboard.nonCriticalShots['Row'+ pastValue[1]].push(pastValue)
+      }
+      for (let nonCriticalShot of me.gameboard.nonCriticalShots[
+        "Row" + pastValue[1]
+      ]) {
+        if (pastValue[0] === "A") {
+          me.gameboard.nonCriticalShots["Row" + pastValue[1]].unshift(
+            pastValue
+          );
           break;
-        }
-        
-        else{
-          if(nonCriticalShot[0].charCodeAt() === pastValue[0].charCodeAt()+1){
-            me.gameboard.nonCriticalShots['Row'+ pastValue[1]].splice(me.gameboard.nonCriticalShots['Row'+ pastValue[1]].indexOf(nonCriticalShot), 0 ,pastValue)
+        } else if (pastValue[0] === "J") {
+          me.gameboard.nonCriticalShots["Row" + pastValue[1]].push(pastValue);
+          break;
+        } else {
+          if (
+            nonCriticalShot[0].charCodeAt() ===
+            pastValue[0].charCodeAt() + 1
+          ) {
+            me.gameboard.nonCriticalShots["Row" + pastValue[1]].splice(
+              me.gameboard.nonCriticalShots["Row" + pastValue[1]].indexOf(
+                nonCriticalShot
+              ),
+              0,
+              pastValue
+            );
             break;
           }
         }
       }
 
-      console.log(me.gameboard.ships[input.id])
-      for(let coordonate of me.gameboard.ships[input.id].coordonates){
-        if(coordonate.join('') === pastValue.join('')){
-          me.gameboard.ships[input.id].coordonates.splice(me.gameboard.ships[input.id].coordonates.indexOf(coordonate),1)
+      console.log(me.gameboard.ships[input.id]);
+      for (let coordonate of me.gameboard.ships[input.id].coordonates) {
+        if (coordonate.join("") === pastValue.join("")) {
+          me.gameboard.ships[input.id].coordonates.splice(
+            me.gameboard.ships[input.id].coordonates.indexOf(coordonate),
+            1
+          );
 
           // Rewrite possible moves based on new length
-          me.gameboard.ships[input.id].allowedMoves = []
+          if (me.gameboard.ships[input.id].coordonates.length === 0) {
+            me.gameboard.ships[input.id].allowedMoves = [];
+          } else if (me.gameboard.ships[input.id].coordonates.length === 1) {
+            let letter = me.gameboard.ships[input.id].coordonates[0][0];
+            let num = me.gameboard.ships[input.id].coordonates[0][1];
+
+            // [ L+1 ; N ]
+            if (letter.charCodeAt(0) + 1 >= 72) {
+              me.gameboard.ships[input.id].allowedMoves[0] = ["J", num];
+            } else {
+              me.gameboard.ships[input.id].allowedMoves[0] = [
+                String.fromCharCode(letter.charCodeAt(0) + 1),
+                num,
+              ];
+            }
+
+            // [ L-1 ; N ]
+            if (letter.charCodeAt(0) - 1 <= 65) {
+              me.gameboard.ships[input.id].allowedMoves[1] = ["A", num];
+            } else {
+              me.gameboard.ships[input.id].allowedMoves[1] = [
+                String.fromCharCode(letter.charCodeAt(0) - 1),
+                num,
+              ];
+            }
+
+            // [ L ; N + 1 ]
+            if (Number(num) + 1 >= 10) {
+              me.gameboard.ships[input.id].allowedMoves[2] = [letter, "10"];
+            } else {
+              me.gameboard.ships[input.id].allowedMoves[2] = [
+                letter,
+                String(Number(num) + 1),
+              ];
+            }
+
+            // [ L-1 ; N - 1 ]
+            if (Number(num) - 1 <= 1) {
+              me.gameboard.ships[input.id].allowedMoves[3] = [letter, "1"];
+              console.log([letter, 1]);
+            } else {
+              me.gameboard.ships[input.id].allowedMoves[3] = [
+                letter,
+                String(Number(num) - 1),
+              ];
+              console.log([letter, String(Number(num) - 1)]);
+              console.log(me.gameboard.ships[input.id].allowedMoves[4]);
+            }
+
+            me.gameboard.ships[input.id].allowedMoves = me.gameboard.ships[
+              input.id
+            ].allowedMoves.filter((move) => move !== undefined);
+            console.log(me.gameboard.ships[input.id].allowedMoves);
+          } else if (me.gameboard.ships[input.id].coordonates.length === 2) {
+            console.log(me.gameboard.ships[input.id].coordonates);
+            if (
+              me.gameboard.ships[input.id].coordonates[0][0] !==
+                me.gameboard.ships[input.id].coordonates[1][0] &&
+              me.gameboard.ships[input.id].coordonates[0][1] ===
+                me.gameboard.ships[input.id].coordonates[1][1]
+            ) {
+              let orderedTwoMoves = me.gameboard.ships[
+                input.id
+              ].coordonates.sort(
+                (a, b) => a[0].charCodeAt() - b[0].charCodeAt()
+              );
+              me.gameboard.ships[input.id].allowedMoves = [];
+
+              if (orderedTwoMoves[0][0].charCodeAt() - 1 >= 65) {
+                me.gameboard.ships[input.id].allowedMoves.push([
+                  String.fromCharCode(orderedTwoMoves[0][0].charCodeAt() - 1),
+                  orderedTwoMoves[0][1],
+                ]);
+              }
+              if (orderedTwoMoves[1][0].charCodeAt() + 1 <= 75) {
+                me.gameboard.ships[input.id].allowedMoves.push([
+                  String.fromCharCode(orderedTwoMoves[1][0].charCodeAt() + 1),
+                  orderedTwoMoves[1][1],
+                ]);
+              }
+            } else if (
+              me.gameboard.ships[input.id].coordonates[0][0] ===
+                me.gameboard.ships[input.id].coordonates[1][0] &&
+              me.gameboard.ships[input.id].coordonates[0][1] !==
+                me.gameboard.ships[input.id].coordonates[1][1]
+            ) {
+              let orderedTwoMoves = me.gameboard.ships[
+                input.id
+              ].coordonates.sort((a, b) => a[1] - b[1]);
+              me.gameboard.ships[input.id].allowedMoves = [];
+              if (Number(orderedTwoMoves[0][1]) - 1 >= 1) {
+                me.gameboard.ships[input.id].allowedMoves.push([
+                  orderedTwoMoves[0][0],
+                  String(Number(orderedTwoMoves[0][1]) - 1),
+                ]);
+              }
+              if (Number(orderedTwoMoves[1][1]) + 1 <= 10) {
+                me.gameboard.ships[input.id].allowedMoves.push([
+                  orderedTwoMoves[1][0],
+                  String(Number(orderedTwoMoves[1][1]) + 1),
+                ]);
+              }
+            }
+          }
         }
       }
 
+      // EDITING COLOR GREY RED BLUE
+      placingMapCoordonates.forEach((coordonate) => {
+        if (coordonate.id === pastValue.join("")) {
+          coordonate.classList.remove("squareInputed");
+
+          for (let row of tableRow) {
+            if (row.children[0].textContent.toLowerCase() === input.id) {
+              if (me.gameboard.ships[input.id].coordonates.length === 0) {
+                row.classList.add('greyBorder');
+                row.classList.remove('redBorder');
+                row.classList.remove('blueBorder');
+                row.children[0].style.color = 'black'
+                row.children[1].style.color = 'black'
+                row.children[2].classList.add('grey')
+                row.children[2].textContent = "0"
+                row.children[2].removeAttribute('style')  
+              } else if (
+                me.gameboard.ships[input.id].coordonates.length >= 1 &&
+                me.gameboard.ships[input.id].coordonates.length < 5
+              ) {
+                row.classList.add('redBorder');
+                row.classList.remove('greyBorder');
+                row.classList.remove('blueBorder');
+                row.children[0].style.color = '#BC4B4B'
+                row.children[1].style.color = '#BC4B4B'
+                row.children[2].classList.add('grey')
+                row.children[2].textContent = "0" 
+                row.children[2].removeAttribute('style')
+              }
+            }
+          }
+        }
+      });
     }
-  })
-})
+  });
+});

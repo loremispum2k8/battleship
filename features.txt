@@ -1,2 +1,6 @@
-Clicking on the last input available leads to the coordonate disapearing and being reutrn to all the arrays
-> criticalShots
+-->> REWWRITE new possible moves to make game work after deleting coordonates
+
+
+    Edit the colors for my Boats table -> Grey (All inputs empty), Red (Some inputs filled), Blue (All inputs filled)
+
+    Limit input to the latest one

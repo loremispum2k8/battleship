@@ -246,3 +246,15 @@ body{
 .squareInputed{
     background-color: black;
 }
+.greyBorder{
+    box-shadow: 0px 0px 0px 0.5px #B7B7B7;
+}
+.redBorder{
+    box-shadow: 0px 0px 0px 1px #BC4B4B;
+}
+.blueBorder{
+    box-shadow: 0px 0px 0px 1px #5986E9;
+}
+.grey{
+    color: rgb(183, 183, 183);
+}
