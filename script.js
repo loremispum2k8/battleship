@@ -383,8 +383,9 @@ class Player {
 let me = new Player();
 let computer = new Player();
 
+
+let placingDoneButton = document.querySelector('.placingDoneButton')
 function finishMap(){
-  let placingDoneButton = document.querySelector('.placingDoneButton')
   let allCoordonatesPlaced = true
   for(let ship in me.gameboard.ships){
     if(me.gameboard.ships[ship].coordonates.length !== me.gameboard.ships[ship].length){
@@ -394,6 +395,8 @@ function finishMap(){
   if(allCoordonatesPlaced){
     console.log('allPlaced')
     placingDoneButton.classList.add('mapDone')
+  }else{
+    placingDoneButton.classList.remove('mapDone')
   }
 }
 
@@ -401,6 +404,15 @@ let tableRow = document.querySelectorAll(".tableRow");
 let placingMapCoordonates = document.querySelectorAll(".square-placing");
 let coordonateInputs = document.querySelectorAll(".coordonateInput");
 tableQuantity = document.querySelectorAll('.tableQuantity')
+
+coordonateInputs.forEach((input)=>{
+  if(input.disabled){
+    input.style.cursor = "not-allowed"
+    input.style.backgroundColor = "#E6E6E6"
+  }else if(!input.disabled){
+    input.classList.add('activeInput')
+  }
+})
 
 coordonateInputs.forEach((input) => {
   input.addEventListener("change", () => {
@@ -410,6 +422,12 @@ coordonateInputs.forEach((input) => {
     console.log(input.id);
     me.gameboard.placeBoat(input.id, input.value);
     finishMap()
+    if(input.nextElementSibling){
+      input.nextElementSibling.classList.add('activeInput')
+      input.nextElementSibling.removeAttribute('disabled')
+      input.nextElementSibling.style.cursor = "pointer"
+      input.nextElementSibling.style.backgroundColor = "white"
+    }
     console.log("---> ", me.gameboard);
     placingMapCoordonates.forEach((coordonate) => {
       for (let leftMove of me.gameboard.historyShots) {
@@ -466,7 +484,8 @@ coordonateInputs.forEach((input) => {
     if (input.value !== "") {
       let pastValue = [input.value[0], input.value.slice(1)];
       input.value = null;
-
+      finishMap()
+      placingDoneButton.classList.remove('mapDone')
       for (let criticalShot of me.gameboard.criticalShots) {
         if (criticalShot.join("") === pastValue.join("")) {
           me.gameboard.criticalShots.splice(

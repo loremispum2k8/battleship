@@ -271,3 +271,11 @@ body{
     background-color: #5986E9;
     color: white;
 }
+.activeInput{
+    transition: all 0.1s;
+    box-shadow: 2px 2px 4px 0px hsla(0, 0%, 0%, 0.10);
+}
+.activeInput:hover{
+    outline: 1px solid #5986E9;
+    outline-offset: -1px;
+}
