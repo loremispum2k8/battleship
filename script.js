@@ -383,50 +383,53 @@ class Player {
 let me = new Player();
 let computer = new Player();
 
-
-let placingDoneButton = document.querySelector('.placingDoneButton')
-function finishMap(){
-  let allCoordonatesPlaced = true
-  for(let ship in me.gameboard.ships){
-    if(me.gameboard.ships[ship].coordonates.length !== me.gameboard.ships[ship].length){
-      allCoordonatesPlaced = false;
-    }
-  }
-  if(allCoordonatesPlaced){
-    console.log('allPlaced')
-    placingDoneButton.classList.add('mapDone')
-  }else{
-    placingDoneButton.classList.remove('mapDone')
-  }
-}
-
+let placingContainer = document.querySelector(".placingContainer");
+let placingDoneButton = document.querySelector(".placingDoneButton");
 let tableRow = document.querySelectorAll(".tableRow");
 let placingMapCoordonates = document.querySelectorAll(".square-placing");
 let coordonateInputs = document.querySelectorAll(".coordonateInput");
-tableQuantity = document.querySelectorAll('.tableQuantity')
+tableQuantity = document.querySelectorAll(".tableQuantity");
 
-coordonateInputs.forEach((input)=>{
-  if(input.disabled){
-    input.style.cursor = "not-allowed"
-    input.style.backgroundColor = "#E6E6E6"
-  }else if(!input.disabled){
-    input.classList.add('activeInput')
+function finishMap() {
+  let allCoordonatesPlaced = true;
+  for (let ship in me.gameboard.ships) {
+    if (
+      me.gameboard.ships[ship].coordonates.length !==
+      me.gameboard.ships[ship].length
+    ) {
+      allCoordonatesPlaced = false;
+    }
   }
-})
+  if (allCoordonatesPlaced) {
+    console.log("allPlaced");
+    placingDoneButton.classList.add("mapDone");
+  } else {
+    placingDoneButton.classList.remove("mapDone");
+  }
+}
+
+coordonateInputs.forEach((input) => {
+  if (input.disabled) {
+    input.style.cursor = "not-allowed";
+    input.style.backgroundColor = "#E6E6E6";
+  } else if (!input.disabled) {
+    input.classList.add("activeInput");
+  }
+});
 
 coordonateInputs.forEach((input) => {
   input.addEventListener("change", () => {
     let validatedCoordonate = false;
-    input.value = input.value.toUpperCase()
+    input.value = input.value.toUpperCase();
     console.log(input.value);
     console.log(input.id);
     me.gameboard.placeBoat(input.id, input.value);
-    finishMap()
-    if(input.nextElementSibling){
-      input.nextElementSibling.classList.add('activeInput')
-      input.nextElementSibling.removeAttribute('disabled')
-      input.nextElementSibling.style.cursor = "pointer"
-      input.nextElementSibling.style.backgroundColor = "white"
+    finishMap();
+    if (input.nextElementSibling) {
+      input.nextElementSibling.classList.add("activeInput");
+      input.nextElementSibling.removeAttribute("disabled");
+      input.nextElementSibling.style.cursor = "pointer";
+      input.nextElementSibling.style.backgroundColor = "white";
     }
     console.log("---> ", me.gameboard);
     placingMapCoordonates.forEach((coordonate) => {
@@ -436,42 +439,41 @@ coordonateInputs.forEach((input) => {
         }
       }
 
-      if (
-        coordonate.id === input.value &&
-        validatedCoordonate
-      ) {
+      if (coordonate.id === input.value && validatedCoordonate) {
         console.log(coordonate.classList.add("squareInputed"));
         for (let row of tableRow) {
           if (row.children[0].textContent.toLowerCase() === input.id) {
-            console.log(me.gameboard.ships[input.id].coordonates.length === me.gameboard.ships[input.id].length)
+            console.log(
+              me.gameboard.ships[input.id].coordonates.length ===
+                me.gameboard.ships[input.id].length
+            );
             if (
               me.gameboard.ships[input.id].coordonates.length ===
               me.gameboard.ships[input.id].length
             ) {
-              console.log('ADD BLUE ')
-                row.classList.add('blueBorder');
-                row.classList.remove('redBorder');
-                row.classList.remove('greyBorder');
-                row.children[0].style.color = '#5986E9'
-                row.children[1].style.color = '#5986E9'
-                row.children[2].style.color = '#5986E9'   
-                row.children[2].textContent = "1"
-                row.children[2].classList.remove('grey')
-            }
-            else if (
+              console.log("ADD BLUE ");
+              row.classList.add("blueBorder");
+              row.classList.remove("redBorder");
+              row.classList.remove("greyBorder");
+              row.children[0].style.color = "#5986E9";
+              row.children[1].style.color = "#5986E9";
+              row.children[2].style.color = "#5986E9";
+              row.children[2].textContent = "1";
+              row.children[2].classList.remove("grey");
+            } else if (
               me.gameboard.ships[input.id].coordonates.length >= 1 &&
               me.gameboard.ships[input.id].coordonates.length < 5
             ) {
-              console.log('addingred')
-                row.classList.add('redBorder');
-                row.classList.remove('greyBorder');
-                row.classList.remove('blueBorder');
-                row.children[0].style.color = '#BC4B4B'
-                row.children[1].style.color = '#BC4B4B'
-                row.children[2].classList.add('grey')
-                row.children[2].textContent = "0"
-                row.children[2].removeAttribute('style')
-            } 
+              console.log("addingred");
+              row.classList.add("redBorder");
+              row.classList.remove("greyBorder");
+              row.classList.remove("blueBorder");
+              row.children[0].style.color = "#BC4B4B";
+              row.children[1].style.color = "#BC4B4B";
+              row.children[2].classList.add("grey");
+              row.children[2].textContent = "0";
+              row.children[2].removeAttribute("style");
+            }
           }
         }
       }
@@ -484,8 +486,8 @@ coordonateInputs.forEach((input) => {
     if (input.value !== "") {
       let pastValue = [input.value[0], input.value.slice(1)];
       input.value = null;
-      finishMap()
-      placingDoneButton.classList.remove('mapDone')
+      finishMap();
+      placingDoneButton.classList.remove("mapDone");
       for (let criticalShot of me.gameboard.criticalShots) {
         if (criticalShot.join("") === pastValue.join("")) {
           me.gameboard.criticalShots.splice(
@@ -654,26 +656,26 @@ coordonateInputs.forEach((input) => {
           for (let row of tableRow) {
             if (row.children[0].textContent.toLowerCase() === input.id) {
               if (me.gameboard.ships[input.id].coordonates.length === 0) {
-                row.classList.add('greyBorder');
-                row.classList.remove('redBorder');
-                row.classList.remove('blueBorder');
-                row.children[0].style.color = 'black'
-                row.children[1].style.color = 'black'
-                row.children[2].classList.add('grey')
-                row.children[2].textContent = "0"
-                row.children[2].removeAttribute('style')  
+                row.classList.add("greyBorder");
+                row.classList.remove("redBorder");
+                row.classList.remove("blueBorder");
+                row.children[0].style.color = "black";
+                row.children[1].style.color = "black";
+                row.children[2].classList.add("grey");
+                row.children[2].textContent = "0";
+                row.children[2].removeAttribute("style");
               } else if (
                 me.gameboard.ships[input.id].coordonates.length >= 1 &&
                 me.gameboard.ships[input.id].coordonates.length < 5
               ) {
-                row.classList.add('redBorder');
-                row.classList.remove('greyBorder');
-                row.classList.remove('blueBorder');
-                row.children[0].style.color = '#BC4B4B'
-                row.children[1].style.color = '#BC4B4B'
-                row.children[2].classList.add('grey')
-                row.children[2].textContent = "0" 
-                row.children[2].removeAttribute('style')
+                row.classList.add("redBorder");
+                row.classList.remove("greyBorder");
+                row.classList.remove("blueBorder");
+                row.children[0].style.color = "#BC4B4B";
+                row.children[1].style.color = "#BC4B4B";
+                row.children[2].classList.add("grey");
+                row.children[2].textContent = "0";
+                row.children[2].removeAttribute("style");
               }
             }
           }
@@ -683,5 +685,146 @@ coordonateInputs.forEach((input) => {
   });
 });
 
+placingDoneButton.addEventListener("click", (e) => {
+  if (e.target.classList.contains("mapDone")) {
+    placingContainer.style.display = "none";
+  }
+});
 
 
+
+
+let randomCoordonatesHistory = [];
+// Column or Row
+function randomCoord() {
+  let row_column_generator;
+  let letter_number_generator_universal;
+  let first_number_letter;
+  let validCoordonates = false;
+  let randomNumber = Math.random();
+
+
+  if (randomNumber <= 0.5) {
+    row_column_generator = "row";
+    //Pick universal number for row
+    randomNumber = String(Math.floor(Math.random() * 10));
+    letter_number_generator_universal = randomNumber;
+    console.log("Universal Number: ", letter_number_generator_universal);
+  }
+  // --->>>>>>>   Working on columns
+  else if (randomNumber > 0.5) {
+    let randomCoordonates = [];
+    row_column_generator = "column";
+
+    //Pick universal letter for column
+    randomNumber = Math.floor(Math.random() * 10);
+    switch (randomNumber) {
+      case 0:
+        letter_number_generator_universal = "A";
+        break;
+      case 1:
+        letter_number_generator_universal = "B";
+        break;
+      case 2:
+        letter_number_generator_universal = "C";
+        break;
+      case 3:
+        letter_number_generator_universal = "D";
+        break;
+      case 4:
+        letter_number_generator_universal = "E";
+        break;
+      case 5:
+        letter_number_generator_universal = "F";
+        break;
+      case 6:
+        letter_number_generator_universal = "G";
+        break;
+      case 7:
+        letter_number_generator_universal = "H";
+        break;
+      case 8:
+        letter_number_generator_universal = "I";
+        break;
+      case 9:
+        letter_number_generator_universal = "J";
+        break;
+    }
+    console.log("Universal Letter: ", letter_number_generator_universal);
+
+    //Pick first number coordonate
+    function pickFirstNumbers() {
+      first_number_letter = Math.floor(Math.random() * 10);
+
+      if (5 - (10 - first_number_letter + 1) <= 0) {
+        console.log("Fits all 5 coordonates before 10");
+        randomCoordonates = [];
+        randomCoordonates.push([
+          letter_number_generator_universal,
+          String(first_number_letter),
+        ]);
+        for (let i = 1; i <= 4; i++) {
+          randomCoordonates.push([
+            letter_number_generator_universal,
+            String(first_number_letter + i),
+          ]);
+        }
+        //console.log(randomCoordonates);
+      } 
+      
+      else if (5 - (10 - first_number_letter + 1) > 0) {
+        console.log(
+          "Does not fit all 5 coordonates before 10 and should also add: ",
+          5 - (10 - first_number_letter + 1),
+          " coordonates"
+        );
+        randomCoordonates = [];
+        randomCoordonates.push([
+          letter_number_generator_universal,
+          String(first_number_letter),
+        ]);
+        for (let i = 1; i <= 10 - first_number_letter; i++) {
+          randomCoordonates.push([
+            letter_number_generator_universal,
+            String(first_number_letter + i),
+          ]);
+        }
+        for (let i = 1; i <= 5 - (10 - first_number_letter + 1); i++) {
+          randomCoordonates.push([
+            letter_number_generator_universal,
+            String(first_number_letter - i),
+          ]);
+        }
+        //console.log(randomCoordonates);
+      }
+
+      validCoordonates = true;
+      for (let coordonate of randomCoordonatesHistory) {
+        for (let randomCoodonate in randomCoordonates) {
+          if (
+            coordonate[0] === randomCoodonate[0] &&
+            coordonate[1] === randomCoodonate[1]
+          ) {
+            console.log(' -->> REPEATING POSITION FOUND  <<--')
+            validCoordonates = false;
+          }
+        }
+      }
+
+      if(validCoordonates){
+        for (let randomCoodonate of randomCoordonates) {
+          randomCoordonatesHistory.push(randomCoodonate)
+        }
+      }
+
+    }
+
+    do {
+      pickFirstNumbers();
+    } while ((validCoordonates = false));
+
+    console.log(randomCoordonates)
+  }
+
+  console.log(row_column_generator);
+}
