@@ -692,7 +692,8 @@ placingDoneButton.addEventListener("click", (e) => {
 });
 
 
-let randomBoats = {
+function getComputerCoordonates(){
+  let randomBoats = {
    ships:{
     carrier: {
     direction: null,
@@ -871,11 +872,11 @@ function verifyRows(row,boatLength){
   let verifiedRow = row
 
   for(let historyCoordonate of randomBoats.history){
-    for(let rowCoordonate of row){
+    for(let rowCoordonate of verifiedRow){
        if(historyCoordonate.join('') === rowCoordonate.join('')){
         rowVerified = false;
         console.log('Found dublicate: history -->  ',historyCoordonate,' coordonate: --> ', rowCoordonate)
-        console.log(row)
+        console.log(verifiedRow)
         break
       }
     }
@@ -887,9 +888,10 @@ function verifyRows(row,boatLength){
 
     rowVerified = true;
     for(let historyCoordonate of randomBoats.history){
-      for(let rowCoordonate of row){
+      for(let rowCoordonate of verifiedRow){
         if(historyCoordonate.join('') === rowCoordonate.join('')){
           rowVerified = false;
+          break;
         }
       }
     } 
@@ -902,20 +904,49 @@ function verifyRows(row,boatLength){
 }
 
 function verifyColumns(column,boatLength){
-  
-}
+  columnVerified = true;
+  let verifiedColumn = column;
 
+  for(let historyCoordonate of randomBoats.history){
+    for(let columnCoordonate of verifiedColumn){
+      if(historyCoordonate.join('') === columnCoordonate.join('')){
+        columnVerified = false;
+        console.log('Found dublicate: history -->  ',historyCoordonate,' coordonate: --> ', columnCoordonate)
+        console.log(verifiedColumn)
+        break;
+      }
+    }
+  }
+
+  while(columnVerified === false){
+    console.log('verification declined, repeating function')
+    verifiedColumn = getRandomColumn(getUniversalLetter_Column(),getfirstNumber_Column(), boatLength)
+
+    columnVerified = true;
+    for(let historyCoordonate of randomBoats.history){
+      for(let columnCoordonate of verifiedColumn){
+        if(historyCoordonate.join('') === columnCoordonate.join('')){
+          columnVerified = false;
+          break;
+        }
+      }
+    }
+  }
+
+  for(let verifiedColumnCoordonate of verifiedColumn){
+    randomBoats.history.push(verifiedColumnCoordonate)
+  }
+  return verifiedColumn
+
+}
 
 for(let ship in randomBoats.ships){
   if(randomBoats.ships[ship].direction === 'row'){
     randomBoats.ships[ship].coordonates = verifyRows(getRandomRow(getUniversalNumber_Row(), getfirstLetter_Row(), randomBoats.ships[ship].length),randomBoats.ships[ship].length)
+  }else if(randomBoats.ships[ship].direction === 'column'){
+    randomBoats.ships[ship].coordonates = verifyColumns(getRandomColumn(getUniversalLetter_Column(),getfirstNumber_Column(), randomBoats.ships[ship].length),randomBoats.ships[ship].length)
   }
 }
 
-
-
-
-
-//     randomBoats.ships[ship].coordonates = getRandomColumn(getUniversalLetter_Column(),getfirstNumber_Column(), randomBoats.ships[ship].length)
-
-
+return randomBoats;
+}
