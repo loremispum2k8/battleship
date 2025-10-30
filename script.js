@@ -440,7 +440,11 @@ coordonateInputs.forEach((input) => {
       }
 
       if (coordonate.id === input.value && validatedCoordonate) {
-        console.log(coordonate.classList.add("squareInputed"));
+        coordonate.classList.add("squareInputed");
+        coordonate.classList.add("growMapCoordonate");
+        setTimeout(()=>{
+          coordonate.classList.remove("growMapCoordonate");
+        },400)
         for (let row of tableRow) {
           if (row.children[0].textContent.toLowerCase() === input.id) {
             console.log(
@@ -652,6 +656,10 @@ coordonateInputs.forEach((input) => {
       placingMapCoordonates.forEach((coordonate) => {
         if (coordonate.id === pastValue.join("")) {
           coordonate.classList.remove("squareInputed");
+          coordonate.classList.add('shrinkMapCoordonate')
+          setTimeout(()=>{
+            coordonate.classList.remove('shrinkMapCoordonate')
+          },400)
 
           for (let row of tableRow) {
             if (row.children[0].textContent.toLowerCase() === input.id) {

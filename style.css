@@ -299,3 +299,49 @@ body{
         background-position: 200% center;
     }
 }
+
+.shrinkMapCoordonate{
+    animation: shrinkMapCoordonate 0.3s ease-in 1;
+}
+@keyframes shrinkMapCoordonate {
+    0%{
+        transform: scale(1);
+    }
+    25%{
+        transform: scale(1.2);
+        background-color: #a3bdf5;
+    }
+    50%{
+        transform: scale(0.4);
+        border-radius: 20%;
+        background-color: #426ac0;
+    }
+    100%{
+        transform: scale(1);
+        border-radius: 20%;
+        background-color: #5986E9;
+    }
+}
+
+.growMapCoordonate{
+    animation: growMapCoordonate 0.3s ease-in 1;
+}
+@keyframes growMapCoordonate {
+    0%{
+        transform: scale(1);
+    }
+    25%{
+        transform: scale(1.2);
+        background-color: #a3bdf5;
+    }
+    50%{
+        transform: scale(0.4);
+        border-radius: 20%;
+        background-color: #2c3e65;
+    }
+    100%{
+        transform: scale(1);
+        border-radius: 20%;
+        background-color: #000000;
+    }
+}
