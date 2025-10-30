@@ -5,11 +5,35 @@
     2. If 0-0.5 (row) randomly pick 0-10 (number)  -> 1 number 
        If 0.5-1 (column) randomly pick 0-10 (letter)  --> 1 letter
     3. Pick letters or numbers based on the boat length
--->    Pick the first number or the first letter out of the boat length
+    Pick the first number or the first letter out of the boat length
+--> Make the column system work based on length from 2-5 from the for loop, instead of using 5
 
       Prevent a new boat from hitting another. If at least on coordonate hits another boat then redo the coordonates. Save coordonates history
        After getting the first random letter or number add the rest up or right. If the index goes outside 1 or J add the rest the opposite dirrection down or left from the original random coordonate
 
+
+randomBoats{
+   carrier: {
+      coordonates: []
+      length: 5
+   }
+   battleship: {
+      coordonates: []
+      length: 4
+   }
+   cruiser: {
+      coordonates: []
+      length: 3
+   }
+   submarine: {
+      coordonates: []
+      length: 3
+   }
+   destroyer: {
+      coordonates: []
+      length: 2
+   }
+}
 
 
 

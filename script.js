@@ -58,9 +58,9 @@ class Gameboard {
     // CONSTRUCTING POSSIBLE MOVES
     if (
       this.ships[ship].coordonates.length === 0 &&
-      ((coordonate[0].charCodeAt() >= 65 && coordonate[0].charCodeAt() < 75) ||
+      ((coordonate[0].charCodeAt() >= 65 && coordonate[0].charCodeAt() < 74) ||
         (coordonate[0].charCodeAt() > 65 &&
-          coordonate[0].charCodeAt() <= 75)) &&
+          coordonate[0].charCodeAt() <= 74)) &&
       (Number(coordonate[1]) >= 1 || Number(coordonate[1]) <= 10)
     ) {
       this.ships[ship].allowedMoves.push(coordonate);
@@ -83,7 +83,7 @@ class Gameboard {
             orderedTwoMoves[0][1],
           ]);
         }
-        if (orderedTwoMoves[1][0].charCodeAt() + 1 <= 75) {
+        if (orderedTwoMoves[1][0].charCodeAt() + 1 <= 74) {
           this.ships[ship].allowedMoves.push([
             String.fromCharCode(orderedTwoMoves[1][0].charCodeAt() + 1),
             orderedTwoMoves[1][1],
@@ -159,7 +159,7 @@ class Gameboard {
             ordersThreeOrMoreMoves.length - 1
           ][0].charCodeAt() +
             1 <=
-          75
+          74
         ) {
           this.ships[ship].allowedMoves.push([
             String.fromCharCode(
@@ -615,7 +615,7 @@ coordonateInputs.forEach((input) => {
                   orderedTwoMoves[0][1],
                 ]);
               }
-              if (orderedTwoMoves[1][0].charCodeAt() + 1 <= 75) {
+              if (orderedTwoMoves[1][0].charCodeAt() + 1 <= 74) {
                 me.gameboard.ships[input.id].allowedMoves.push([
                   String.fromCharCode(orderedTwoMoves[1][0].charCodeAt() + 1),
                   orderedTwoMoves[1][1],
@@ -692,139 +692,230 @@ placingDoneButton.addEventListener("click", (e) => {
 });
 
 
-
-
-let randomCoordonatesHistory = [];
-// Column or Row
-function randomCoord() {
-  let row_column_generator;
-  let letter_number_generator_universal;
-  let first_number_letter;
-  let validCoordonates = false;
-  let randomNumber = Math.random();
-
-
-  if (randomNumber <= 0.5) {
-    row_column_generator = "row";
-    //Pick universal number for row
-    randomNumber = String(Math.floor(Math.random() * 10));
-    letter_number_generator_universal = randomNumber;
-    console.log("Universal Number: ", letter_number_generator_universal);
-  }
-  // --->>>>>>>   Working on columns
-  else if (randomNumber > 0.5) {
-    let randomCoordonates = [];
-    row_column_generator = "column";
-
-    //Pick universal letter for column
-    randomNumber = Math.floor(Math.random() * 10);
-    switch (randomNumber) {
-      case 0:
-        letter_number_generator_universal = "A";
-        break;
-      case 1:
-        letter_number_generator_universal = "B";
-        break;
-      case 2:
-        letter_number_generator_universal = "C";
-        break;
-      case 3:
-        letter_number_generator_universal = "D";
-        break;
-      case 4:
-        letter_number_generator_universal = "E";
-        break;
-      case 5:
-        letter_number_generator_universal = "F";
-        break;
-      case 6:
-        letter_number_generator_universal = "G";
-        break;
-      case 7:
-        letter_number_generator_universal = "H";
-        break;
-      case 8:
-        letter_number_generator_universal = "I";
-        break;
-      case 9:
-        letter_number_generator_universal = "J";
-        break;
-    }
-    console.log("Universal Letter: ", letter_number_generator_universal);
-
-    //Pick first number coordonate
-    function pickFirstNumbers() {
-      first_number_letter = Math.floor(Math.random() * 10);
-
-      if (5 - (10 - first_number_letter + 1) <= 0) {
-        console.log("Fits all 5 coordonates before 10");
-        randomCoordonates = [];
-        randomCoordonates.push([
-          letter_number_generator_universal,
-          String(first_number_letter),
-        ]);
-        for (let i = 1; i <= 4; i++) {
-          randomCoordonates.push([
-            letter_number_generator_universal,
-            String(first_number_letter + i),
-          ]);
-        }
-        //console.log(randomCoordonates);
-      } 
-      
-      else if (5 - (10 - first_number_letter + 1) > 0) {
-        console.log(
-          "Does not fit all 5 coordonates before 10 and should also add: ",
-          5 - (10 - first_number_letter + 1),
-          " coordonates"
-        );
-        randomCoordonates = [];
-        randomCoordonates.push([
-          letter_number_generator_universal,
-          String(first_number_letter),
-        ]);
-        for (let i = 1; i <= 10 - first_number_letter; i++) {
-          randomCoordonates.push([
-            letter_number_generator_universal,
-            String(first_number_letter + i),
-          ]);
-        }
-        for (let i = 1; i <= 5 - (10 - first_number_letter + 1); i++) {
-          randomCoordonates.push([
-            letter_number_generator_universal,
-            String(first_number_letter - i),
-          ]);
-        }
-        //console.log(randomCoordonates);
-      }
-
-      validCoordonates = true;
-      for (let coordonate of randomCoordonatesHistory) {
-        for (let randomCoodonate in randomCoordonates) {
-          if (
-            coordonate[0] === randomCoodonate[0] &&
-            coordonate[1] === randomCoodonate[1]
-          ) {
-            console.log(' -->> REPEATING POSITION FOUND  <<--')
-            validCoordonates = false;
-          }
-        }
-      }
-
-      if(validCoordonates){
-        for (let randomCoodonate of randomCoordonates) {
-          randomCoordonatesHistory.push(randomCoodonate)
-        }
-      }
-
-    }
-
-    do {
-      pickFirstNumbers();
-    } while ((validCoordonates = false));
-
-    console.log(randomCoordonates)
-  }
-
-  console.log(row_column_generator);
+let randomBoats = {
+   ships:{
+    carrier: {
+    direction: null,
+    coordonates: null,
+    length: 5
+   },
+   battleship: {
+    direction: null,
+    coordonates: null,
+    length: 4
+   },
+   cruiser: {
+    direction: null,
+    coordonates: null,
+    length: 3
+   },
+   submarine: {
+    direction: null,
+    coordonates: null,
+    length: 3
+   },
+   destroyer: {
+    direction: null,
+    coordonates: null,
+    length: 2
+   }
+   },
+   history:[]
 }
+
+function getDirection(){
+  let randomNumber = Math.random()
+  if(randomNumber <= 0.5){
+    return 'row'
+  }else{
+    return 'column'
+  }
+}
+
+for(let randomBoat in randomBoats.ships){
+  randomBoats.ships[randomBoat].direction = getDirection()
+}
+
+function getUniversalNumber_Row(){
+  let universalNumber = Math.floor(Math.random()*10)+1;
+  return universalNumber
+}
+
+function getUniversalLetter_Column(){
+  let universalLetter = Math.floor(Math.random()*10)+1;
+  switch(universalLetter){
+    case 1:
+      universalLetter = 'A'
+    break;
+    case 2:
+      universalLetter = 'B'
+    break;
+    case 3:
+      universalLetter = 'C'
+    break;
+    case 4:
+      universalLetter = 'D'
+    break;
+    case 5:
+      universalLetter = 'E'
+    break;
+    case 6:
+      universalLetter = 'F'
+    break;
+    case 7:
+      universalLetter = 'G'
+    break;
+    case 8:
+      universalLetter = 'H'
+    break;
+    case 9:
+      universalLetter = 'I'
+    break;
+    case 10:
+      universalLetter = 'J'
+    break;
+  }
+  return universalLetter
+}
+
+function getfirstLetter_Row(){
+  let firstLetter = Math.floor(Math.random()*10)+1;
+  switch(firstLetter){
+    case 1:
+      firstLetter = 'A'
+    break;
+    case 2:
+      firstLetter = 'B'
+    break;
+    case 3:
+      firstLetter = 'C'
+    break;
+    case 4:
+      firstLetter = 'D'
+    break;
+    case 5:
+      firstLetter = 'E'
+    break;
+    case 6:
+      firstLetter = 'F'
+    break;
+    case 7:
+      firstLetter = 'G'
+    break;
+    case 8:
+      firstLetter = 'H'
+    break;
+    case 9:
+      firstLetter = 'I'
+    break;
+    case 10:
+      firstLetter = 'J'
+    break;
+  }
+  return firstLetter
+}
+
+function getfirstNumber_Column(){
+  let firstNumber = Math.floor(Math.random()*10)+1;
+  return firstNumber
+}
+
+function getRandomRow(universalNumber,firstLetter,boatLength){
+  let coordonatesArr = []
+  coordonatesArr.push([firstLetter, String(universalNumber)])
+
+  let rowFormula = boatLength - ( 74 - firstLetter.charCodeAt() + 1);
+
+  if(rowFormula > 0){
+    for( let i = 1; i < ( 74 - firstLetter.charCodeAt() + 1 ); i++ ){
+      coordonatesArr.push( [ String.fromCharCode(firstLetter.charCodeAt() + i ) , String(universalNumber) ] )
+    }
+    for( let i = 1; i <= rowFormula; i++ ){
+      coordonatesArr.push( [ String.fromCharCode(firstLetter.charCodeAt() - i ) , String(universalNumber) ] )
+    }
+  }else if(rowFormula <= 0){
+    for( let i = 1; i < boatLength; i++){
+      coordonatesArr.push( [ String.fromCharCode(firstLetter.charCodeAt() + i ) , String(universalNumber) ] )
+    }
+  }
+
+  return coordonatesArr
+}
+
+
+function getRandomColumn(universalLetter,firstNumber,boatLength){
+  let coordonatesArr = []
+  coordonatesArr.push([universalLetter , String(firstNumber)])
+
+  let columnFormula = boatLength - ( 10 - firstNumber + 1 )
+
+  if(columnFormula > 0){
+    for(let i = 1; i < ( 10 - firstNumber + 1 ); i++){
+      coordonatesArr.push( [ universalLetter  , String(firstNumber + i)])
+    }
+    for(let i = 1; i <= columnFormula; i++){
+      coordonatesArr.push( [ universalLetter  , String(firstNumber - i)])
+    }
+
+  }else if(columnFormula <= 0){
+    for(let i = 1; i < boatLength; i++){
+      coordonatesArr.push( [ universalLetter  , String(firstNumber + i)])
+    }
+  }
+  
+  return coordonatesArr
+}
+
+function verifyRows(row,boatLength){
+  let rowVerified = true;
+  let verifiedRow = row
+
+  for(let historyCoordonate of randomBoats.history){
+    for(let rowCoordonate of row){
+       if(historyCoordonate.join('') === rowCoordonate.join('')){
+        rowVerified = false;
+        console.log('Found dublicate: history -->  ',historyCoordonate,' coordonate: --> ', rowCoordonate)
+        console.log(row)
+        break
+      }
+    }
+  }
+
+  while(rowVerified === false){
+    console.log('verification declined, repeating function')
+    verifiedRow = getRandomRow(getUniversalNumber_Row(), getfirstLetter_Row(), boatLength)
+
+    rowVerified = true;
+    for(let historyCoordonate of randomBoats.history){
+      for(let rowCoordonate of row){
+        if(historyCoordonate.join('') === rowCoordonate.join('')){
+          rowVerified = false;
+        }
+      }
+    } 
+  }
+
+  for(let verifiedRowCoordonate of verifiedRow){
+    randomBoats.history.push(verifiedRowCoordonate)
+  }
+  return verifiedRow;
+}
+
+function verifyColumns(column,boatLength){
+  
+}
+
+
+for(let ship in randomBoats.ships){
+  if(randomBoats.ships[ship].direction === 'row'){
+    randomBoats.ships[ship].coordonates = verifyRows(getRandomRow(getUniversalNumber_Row(), getfirstLetter_Row(), randomBoats.ships[ship].length),randomBoats.ships[ship].length)
+  }
+}
+
+
+
+
+
+//     randomBoats.ships[ship].coordonates = getRandomColumn(getUniversalLetter_Column(),getfirstNumber_Column(), randomBoats.ships[ship].length)
+
+
