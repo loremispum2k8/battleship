@@ -693,9 +693,12 @@ coordonateInputs.forEach((input) => {
   });
 });
 
+let playingContainer = document.querySelector('.playingContainer')
 placingDoneButton.addEventListener("click", (e) => {
   if (e.target.classList.contains("mapDone")) {
     placingContainer.style.display = "none";
+    placeMyBoats()
+    playingContainer.style.display = 'flex'
   }
 });
 
@@ -974,19 +977,36 @@ for(let ship in computer.gameboard.ships){
 }
 
 }
-getComputerCoordonates()
 
-console.log(computer)
-
-let computerSquares = document.querySelectorAll('.computer-square-placing')
-
-for(let ship in computer.gameboard.ships){
-  for(let coordonate of computer.gameboard.ships[ship].coordonates){
-    computerSquares.forEach((square)=>{
-      if(square.id === coordonate.join('')){
-        square.classList.add('computer-squareInputed')
-      };
-    })
+function placeMyBoats(){
+  let mySquares = document.querySelectorAll('.me-square-placing')
+  for(let ship in me.gameboard.ships){
+    for(let coordonate of me.gameboard.ships[ship].coordonates){
+      mySquares.forEach((square)=>{
+        if(square.id === coordonate.join('')){
+          square.classList.add('me-squareInputed')
+        };
+      })
+    }
   }
 }
+
+function placeComputerBoats(){
+  getComputerCoordonates()
+  let computerSquares = document.querySelectorAll('.computer-square-placing')
+
+  for(let ship in computer.gameboard.ships){
+    for(let coordonate of computer.gameboard.ships[ship].coordonates){
+      computerSquares.forEach((square)=>{
+        if(square.id === coordonate.join('')){
+          square.classList.add('computer-squareInputed')
+        };
+      })
+    }
+  }
+}
+
+
+
+console.log(computer)
 

@@ -427,11 +427,24 @@ body{
 }
 
 
+.computerMapPlacing{
+    cursor:pointer;
+}
 .computer-square-placing{
     height: 33px;
     width: 33px;
     box-shadow: 0px 0px 0px 0.5px white;
     background-color: #5986E9;
+    transition: all 0.06s;
+    cursor:pointer;
+}
+.computer-square-placing:hover{
+    transform: scale(0.8);
+    border-radius: 4px;
+}
+.computer-square-placing:active{
+    transform: scale(0.7);
+    border-radius: 6px;
 }
 .computer-squareInputed{
     background-color: black;
