@@ -24,6 +24,7 @@ body{
 }
 
 .placingContainer{
+    opacity: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,18 +94,6 @@ body{
 .coordonateInput::placeholder{
     color: #B7B7B7;
 }
-/*
-.firstInput{
-    cursor: pointer;
-    background-color: white;
-    box-shadow: 2px 2px  2px 0px hsla(0, 0%, 0%, 0.10);
-}
-.firstInput:hover{
-    outline: 2px solid #5986E9;
-}
-.firstInput:focus{
-    outline: 2px solid #5986E9;
-}*/
 .mapPlacingContainer{
     display: flex;
     flex-direction: column;
@@ -301,14 +290,14 @@ body{
 }
 
 .shrinkMapCoordonate{
-    animation: shrinkMapCoordonate 0.3s ease-in 1;
+    animation: shrinkMapCoordonate 0.25s ease-in 1;
 }
 @keyframes shrinkMapCoordonate {
     0%{
         transform: scale(1);
     }
     25%{
-        transform: scale(1.2);
+        transform: scale(1.07);
         background-color: #a3bdf5;
     }
     50%{
@@ -324,14 +313,14 @@ body{
 }
 
 .growMapCoordonate{
-    animation: growMapCoordonate 0.3s ease-in 1;
+    animation: growMapCoordonate 0.25s ease-in 1;
 }
 @keyframes growMapCoordonate {
     0%{
         transform: scale(1);
     }
     25%{
-        transform: scale(1.2);
+        transform: scale(1.07);
         background-color: #a3bdf5;
     }
     50%{
@@ -343,5 +332,66 @@ body{
         transform: scale(1);
         border-radius: 20%;
         background-color: #000000;
+    }
+}
+
+
+.appear{
+    animation: appear 0.6s 1 forwards ease-in;
+}
+@keyframes appear {
+    0%{
+       opacity: 0; 
+    }
+    100%{
+        opacity: 100%;
+    }
+}
+
+.moveRight{
+    animation: moveRight 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes moveRight {
+    0%{
+       transform: translateX(60px); 
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+
+.moveLeft{
+    animation: moveLeft 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes moveLeft {
+    0%{
+       transform: translateX(-60px); 
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+
+.moveTop{
+    animation: moveTop 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes moveTop {
+    0%{
+       transform: translateY(-60px); 
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+.moveBottom{
+    animation: moveBottom 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes moveBottom {
+    0%{
+       transform: translateY(60px); 
+    }
+    100%{
+        transform: translateY(0px);
     }
 }

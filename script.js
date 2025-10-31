@@ -958,3 +958,7 @@ for(let ship in randomBoats.ships){
 
 return randomBoats;
 }
+
+console.log(getComputerCoordonates())
+
+
