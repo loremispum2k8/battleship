@@ -951,14 +951,42 @@ function verifyColumns(column,boatLength){
 for(let ship in randomBoats.ships){
   if(randomBoats.ships[ship].direction === 'row'){
     randomBoats.ships[ship].coordonates = verifyRows(getRandomRow(getUniversalNumber_Row(), getfirstLetter_Row(), randomBoats.ships[ship].length),randomBoats.ships[ship].length)
+    computer.gameboard.ships[ship].coordonates = randomBoats.ships[ship].coordonates
   }else if(randomBoats.ships[ship].direction === 'column'){
     randomBoats.ships[ship].coordonates = verifyColumns(getRandomColumn(getUniversalLetter_Column(),getfirstNumber_Column(), randomBoats.ships[ship].length),randomBoats.ships[ship].length)
+    computer.gameboard.ships[ship].coordonates = randomBoats.ships[ship].coordonates
   }
 }
 
-return randomBoats;
+for(let ship in computer.gameboard.ships){
+  for(let coordonate of computer.gameboard.ships[ship].coordonates){
+    computer.gameboard.criticalShots.push(coordonate)
+    computer.gameboard.historyShots.push(coordonate)
+  }
 }
 
-console.log(getComputerCoordonates())
+for(let ship in computer.gameboard.ships){
+  for(let coordonate of computer.gameboard.ships[ship].coordonates){
+    for(let row in computer.gameboard.nonCriticalShots){
+      computer.gameboard.nonCriticalShots[row] = computer.gameboard.nonCriticalShots[row].filter((rowCoordonate) => rowCoordonate.join('') !== coordonate.join(''))
+    }
+  }
+}
 
+}
+getComputerCoordonates()
+
+console.log(computer)
+
+let computerSquares = document.querySelectorAll('.computer-square-placing')
+
+for(let ship in computer.gameboard.ships){
+  for(let coordonate of computer.gameboard.ships[ship].coordonates){
+    computerSquares.forEach((square)=>{
+      if(square.id === coordonate.join('')){
+        square.classList.add('computer-squareInputed')
+      };
+    })
+  }
+}
 
