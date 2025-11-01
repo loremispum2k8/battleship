@@ -6,7 +6,7 @@ You and the computer each have a fleet of ships — your goal is to sink all of 
 
 ## **Features**
 
-- Personal ship placement — drag or click to place your ships before the battle starts
+- Personal ship placement using coordonates
 
 - Interactive gameplay against the computer
 
