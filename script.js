@@ -46,6 +46,17 @@ class Gameboard {
     }
   }
 
+  areAllBoatsDestroyed(){
+    let areAllBoatsDestroyed = true;
+    for(let ship in this.ships){
+      if(this.ships[ship].isSunk() === false){
+        areAllBoatsDestroyed = false
+        break; 
+      }
+    }
+    return areAllBoatsDestroyed;
+  }
+
   placeBoat(ship, coordonateStr) {
     let historyShotsPass = true;
     let allowedMovePass = false;
@@ -694,10 +705,13 @@ coordonateInputs.forEach((input) => {
 });
 
 let playingContainer = document.querySelector('.playingContainer')
+let computerSquares = document.querySelectorAll('.computer-square-placing')
+let mySquares = document.querySelectorAll('.me-square-placing')
 placingDoneButton.addEventListener("click", (e) => {
   if (e.target.classList.contains("mapDone")) {
     placingContainer.style.display = "none";
     placeMyBoats()
+    placeComputerBoats()
     playingContainer.style.display = 'flex'
   }
 });
@@ -979,12 +993,12 @@ for(let ship in computer.gameboard.ships){
 }
 
 function placeMyBoats(){
-  let mySquares = document.querySelectorAll('.me-square-placing')
   for(let ship in me.gameboard.ships){
     for(let coordonate of me.gameboard.ships[ship].coordonates){
       mySquares.forEach((square)=>{
         if(square.id === coordonate.join('')){
           square.classList.add('me-squareInputed')
+          square.setAttribute('ship-origin',ship);
         };
       })
     }
@@ -993,13 +1007,12 @@ function placeMyBoats(){
 
 function placeComputerBoats(){
   getComputerCoordonates()
-  let computerSquares = document.querySelectorAll('.computer-square-placing')
 
   for(let ship in computer.gameboard.ships){
     for(let coordonate of computer.gameboard.ships[ship].coordonates){
       computerSquares.forEach((square)=>{
         if(square.id === coordonate.join('')){
-          square.classList.add('computer-squareInputed')
+          square.setAttribute('ship-origin',ship);
         };
       })
     }
@@ -1007,6 +1020,52 @@ function placeComputerBoats(){
 }
 
 
+computerSquares.forEach((square)=>{
+  square.addEventListener('click',()=>{
+    if(computer.gameboard.ships[square.getAttribute('ship-origin')]){
+      // Here we have critical coordonates only
+      for(let coordonate of computer.gameboard.ships[square.getAttribute('ship-origin')].coordonates){
+        if (coordonate.join('') === square.id){
+          let shipCoordonateIndex = computer.gameboard.ships[square.getAttribute('ship-origin')].coordonates.indexOf(coordonate)
+          computer.gameboard.ships[square.getAttribute('ship-origin')].coordonates.splice(shipCoordonateIndex,1)
+          
+          let CritticalCoordonateIndex = computer.gameboard.criticalShots.indexOf(coordonate)
+          computer.gameboard.criticalShots.splice(CritticalCoordonateIndex,1)
 
-console.log(computer)
+          computer.gameboard.ships[square.getAttribute('ship-origin')].hits.push(coordonate)
+          computer.gameboard.ships[square.getAttribute('ship-origin')].hit();
+          console.log(computer.gameboard.ships[square.getAttribute('ship-origin')].isSunk())
+
+          if(computer.gameboard.ships[square.getAttribute('ship-origin')].isSunk()){
+            console.log('destroyed all ships', computer.gameboard.ships[square.getAttribute('ship-origin')].hits)
+            square.classList.add('destroyed')
+            
+            computerSquares.forEach((newSquare)=>{
+              for(let coordonate of computer.gameboard.ships[square.getAttribute('ship-origin')].hits){
+                if(coordonate.join('') === newSquare.id){
+                  if(!newSquare.classList.contains('destroyed')){
+                    newSquare.classList.add('destroyed')
+                  }
+                }
+              }
+            })
+
+          }else{
+            console.log('hit')
+            square.classList.add('hit')
+          }
+
+          break;
+        }
+      }
+      if(computer.gameboard.areAllBoatsDestroyed()){
+        playingContainer.style.display = 'none'
+      }
+    }else{
+      console.log('missed')
+      square.classList.add('missed')
+      // Here we have useless coordonates
+    }
+  })
+})
 
