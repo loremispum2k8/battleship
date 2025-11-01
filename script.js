@@ -704,15 +704,32 @@ coordonateInputs.forEach((input) => {
   });
 });
 
+let placingBoatsContainer  = document.querySelector('.placingBoatsContainer ')
+let placingCoordonatesContainer = document.querySelector('.placingCoordonatesContainer')
+let gameTitle = document.querySelector('.gameTitle')
+let playingGameTitle = document.querySelector('.playingGameTitle')
+let myBoatsContainer = document.querySelector('.myBoatsContainer')
+let computerBoatsContainer = document.querySelector('.computerBoatsContainer')
+
 let playingContainer = document.querySelector('.playingContainer')
 let computerSquares = document.querySelectorAll('.computer-square-placing')
 let mySquares = document.querySelectorAll('.me-square-placing')
 placingDoneButton.addEventListener("click", (e) => {
   if (e.target.classList.contains("mapDone")) {
-    placingContainer.style.display = "none";
+    placingContainer.classList.add('dissapear')
+    placingBoatsContainer.classList.add('dissapearRight')
+    placingCoordonatesContainer.classList.add('dissapearLeft')
+    gameTitle.classList.add('dissapearTop')
+    placingDoneButton.classList.add('dissapearBottom')
     placeMyBoats()
     placeComputerBoats()
-    playingContainer.style.display = 'flex'
+    setTimeout(()=>{
+      playingContainer.style.display = 'flex'
+      playingContainer.classList.add('appear')
+      playingGameTitle.classList.add('movePlayTop')
+      myBoatsContainer.classList.add('movePlayLeft')
+      computerBoatsContainer.classList.add('movePlayRight')
+    },700)
   }
 });
 
@@ -1018,7 +1035,6 @@ function placeComputerBoats(){
     }
   }
 }
-
 
 computerSquares.forEach((square)=>{
   square.addEventListener('click',()=>{

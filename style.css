@@ -183,7 +183,7 @@ body{
     gap: 4px;
     background-color: #E6E6E6;
     height: 37px;
-    padding: 3px;
+    padding: 4px;
 }
 .tableHeader{
     border-radius: 8px;
@@ -210,6 +210,12 @@ body{
     font-size: 14px;
     box-shadow: 0px 0px 0px 0.5px #B7B7B7;
     padding: 0px 20px;
+}
+.tableLength{
+    margin-right: 40px;
+}
+.tableQuantity{
+    margin-right:14px;
 }
 .tableType{
     width: 72px;
@@ -289,6 +295,26 @@ body{
         background-position: 200% center;
     }
 }
+.playingGameTitle{
+    opacity: 0;
+    font-size: 50px;
+    font-weight: bold;
+    color: transparent;
+    background-image: linear-gradient(to right, #c3ddfb 5%, #6494FF 50%, #c3ddfb 95%);
+    background-clip: text;
+    background-size: 200%;
+    background-position: 0% center;
+    background-position: center;
+    animation: changeGrad 1.5s linear infinite;
+}
+@keyframes changeGrad {
+    0%{
+        background-position: 0% center;
+    }
+    100%{
+        background-position: 200% center;
+    }
+}
 
 .shrinkMapCoordonate{
     animation: shrinkMapCoordonate 0.25s ease-in 1;
@@ -349,60 +375,9 @@ body{
     }
 }
 
-.moveRight{
-    animation: moveRight 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
-}
-@keyframes moveRight {
-    0%{
-       transform: translateX(60px); 
-    }
-    100%{
-        transform: translateX(0px);
-    }
-}
-
-.moveLeft{
-    animation: moveLeft 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
-}
-@keyframes moveLeft {
-    0%{
-       transform: translateX(-60px); 
-    }
-    100%{
-        transform: translateX(0px);
-    }
-}
-
-.moveTop{
-    animation: moveTop 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
-}
-@keyframes moveTop {
-    0%{
-       transform: translateY(-60px); 
-    }
-    100%{
-        transform: translateY(0px);
-    }
-}
-
-.moveBottom{
-    animation: moveBottom 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
-}
-@keyframes moveBottom {
-    0%{
-       transform: translateY(60px); 
-    }
-    100%{
-        transform: translateY(0px);
-    }
-}
-
-
-
-
-
 .playingContainer{
-    display: flex;
+    opacity: 100;
+    display: none;
     align-items: center;
     flex-direction: column;
     gap: 40px;
@@ -430,6 +405,13 @@ body{
 .computerMapPlacing{
     cursor:crosshair;
 }
+.middlePlayingContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 60px;
+}
 .computer-square-placing{
     height: 33px;
     width: 33px;
@@ -448,6 +430,133 @@ body{
 }
 .computer-squareInputed{
     background-color: black;
+}
+
+.myBoatsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.computerBoatsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.myBoatsTitle{
+    font-size: 20px;
+    font-family: 'InterMedium';
+}
+.computerTitle{
+    font-size: 20px;
+    font-family: 'InterMedium';
+}
+.myBoatsGroup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0px 0px 0px 0.5px #B7B7B7;
+    border-radius: 28px;
+    padding: 20px;
+}
+.computerGroup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0px 0px 0px 0.5px #B7B7B7;
+    border-radius: 28px;
+    padding: 20px;
+}
+.myBoatsTop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 3px;
+    padding: 4px;
+    background-color: #E6E6E6;
+    border-radius: 8px;
+}
+.computerTop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 3px;
+    padding: 4px;
+    background-color: #E6E6E6;
+    border-radius: 8px;
+}
+.myBoatsTop p{
+    font-size: 14px;
+    font-family: 'InterSemiBold';
+    color: #444444;
+    padding: 9px 0px 9px 0px;
+    text-align: center;
+    background-color: white;
+    border-radius: 8px;
+    width: 84px;
+    box-shadow: 2px 2px 2px 0px hsla(0, 0%, 0%, 0.1);
+}
+.computerTop p{
+    font-size: 14px;
+    font-family: 'InterSemiBold';
+    color: #444444;
+    padding: 9px 0px 9px 0px;
+    text-align: center;
+    background-color: white;
+    border-radius: 8px;
+    width: 84px;
+    box-shadow: 2px 2px 2px 0px hsla(0, 0%, 0%, 0.1);
+}
+.myBoatsTopRows{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+.computerTopRows{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+.myBoatsRow{
+    display: flex;
+    padding: 8px 36px 8px 28px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+    border: 1px solid #B7B7B7;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 14px;
+}
+.computerBoatsRow{
+    display: flex;
+    padding: 8px 36px 8px 28px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+    border: 1px solid #B7B7B7;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 14px;
+}
+.myBoatsRow p{
+    font-family: 'InterRegular';
+}
+.computerBoatsRow p{
+    font-family: 'InterRegular';
 }
 
 
@@ -512,5 +621,179 @@ body{
         transform: scale(0);
         border-radius: 10px;
         background-color: #ffffff;
+    }
+}
+
+
+.dissapear{
+    animation: dissapear 0.4s 1 forwards ease-out;
+}
+@keyframes dissapear {
+    0%{
+       opacity: 100%; 
+    }
+    100%{
+        opacity: 0%;
+        display: none;
+    }
+}
+
+.moveRight{
+    animation: moveRight 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes moveRight {
+    0%{
+       transform: translateX(60px); 
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+
+.moveLeft{
+    animation: moveLeft 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes moveLeft {
+    0%{
+       transform: translateX(-60px); 
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+
+.moveTop{
+    animation: moveTop 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes moveTop {
+    0%{
+       transform: translateY(-60px); 
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+.moveBottom{
+    animation: moveBottom 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes moveBottom {
+    0%{
+       transform: translateY(60px); 
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+
+.movePlayRight{
+    animation: movePlayRight 0.4s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes movePlayRight {
+    0%{
+       transform: translateX(60px);
+       opacity: 0;
+    }
+    100%{
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+.movePlayLeft{
+    animation: movePlayLeft 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes movePlayLeft {
+    0%{
+       transform: translateX(-60px); 
+       opacity: 0;
+    }
+    100%{
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+.movePlayTop{
+    animation: movePlayTop 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes movePlayTop {
+    0%{
+       transform: translateY(-60px); 
+       opacity: 0;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.movePlayBottom{
+    animation: movePlayBottom 0.6s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes movePlayBottom {
+    0%{
+       transform: translateY(60px); 
+       opacity: 0;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+
+
+
+.dissapearRight{
+    animation: dissapearRight 0.4s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes dissapearRight {
+    0%{
+       transform: translateX(0px); 
+    }
+    100%{
+        transform: translateX(60px);
+        opacity: 0;
+    }
+}
+
+.dissapearLeft{
+    animation: dissapearLeft 0.4s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes dissapearLeft {
+    0%{
+       transform: translateX(0px); 
+    }
+    100%{
+        transform: translateX(-60px);
+        opacity: 0;
+    }
+}
+
+.dissapearTop{
+    animation: dissapearTop 0.4s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes dissapearTop {
+    0%{
+       transform: translateY(0px); 
+    }
+    100%{
+        transform: translateY(-60px);
+        opacity: 0;
+    }
+}
+
+.dissapearBottom{
+    animation: dissapearBottom 0.4s 1 forwards cubic-bezier(.47,1.64,.41,.8);
+}
+@keyframes dissapearBottom {
+    0%{
+       transform: translateY(0px); 
+    }
+    100%{
+        transform: translateY(60px);
+        opacity: 0;
     }
 }

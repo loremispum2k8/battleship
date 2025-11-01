@@ -390,18 +390,47 @@
       <button class="placingDoneButton moveBottom">Done</button>
     </div>
 
-    <div class="playingContainer" style="display:none;">
-      <div class="playingContainerMaps">
-        <p
-          style="
-            position: absolute;
-            transform: translateY(-230px);
-            margin-left: -400px;
-          "
-        >
-          Me
-        </p>
-        <div class="mapPlacingContainer myMap">
+    <div class="playingContainer">
+
+      <p class="playingGameTitle">Battleships</p>
+
+      <div class="middlePlayingContainer">
+
+        <div class="myBoatsContainer">
+          <!--Here-->
+          <p class="myBoatsTitle">My Boats</p>
+          <div class="myBoatsGroup">
+            <div class="myBoatsTop">
+              <p>Type</p>
+              <p>Quantity</p>
+            </div>
+            <div class="myBoatsTopRows">
+              <div class="myBoatsRow" id="carrier">
+                <p>Carrier</p>
+                <p>1</p>
+              </div>
+              <div class="myBoatsRow" id="battleship">
+                <p>Battleship</p>
+                <p>1</p>
+              </div>
+              <div class="myBoatsRow" id="cruiser">
+                <p>Cruiser</p>
+                <p>1</p>
+              </div>
+              <div class="myBoatsRow" id="submarine">
+                <p>Submarine</p>
+                <p>1</p>
+              </div>
+              <div class="myBoatsRow" id="destroyer">
+                <p>Destroyer</p>
+                <p>1</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="playingContainerMaps">
+          <div class="mapPlacingContainer myMap">
           <div class="mapPlacingTopBottom">
             <div class="mapCoordonate">A</div>
             <div class="mapCoordonate">B</div>
@@ -592,18 +621,8 @@
             <div class="mapCoordonate">I</div>
             <div class="mapCoordonate">J</div>
           </div>
-        </div>
-
-        <p
-          style="
-            position: absolute;
-            transform: translateY(-230px);
-            margin-left: 400px;
-          "
-        >
-          Computer
-        </p>
-        <div class="mapPlacingContainer computerMap">
+          </div>
+          <div class="mapPlacingContainer computerMap">
           <div class="mapPlacingTopBottom">
             <div class="mapCoordonate">A</div>
             <div class="mapCoordonate">B</div>
@@ -794,8 +813,44 @@
             <div class="mapCoordonate">I</div>
             <div class="mapCoordonate">J</div>
           </div>
+          </div>
         </div>
+
+        <div class="computerBoatsContainer">
+          <!--Here-->
+          <p class="computerTitle">Bot's Boats</p>
+          <div class="computerGroup">
+            <div class="computerTop">
+              <p>Type</p>
+              <p>Quantity</p>
+            </div>
+            <div class="computerTopRows">
+              <div class="computerBoatsRow" id="carrier">
+                <p>Carrier</p>
+                <p>1</p>
+              </div>
+              <div class="computerBoatsRow" id="battleship">
+                <p>Battleship</p>
+                <p>1</p>
+              </div>
+              <div class="computerBoatsRow" id="cruiser">
+                <p>Cruiser</p>
+                <p>1</p>
+              </div>
+              <div class="computerBoatsRow" id="submarine">
+                <p>Submarine</p>
+                <p>1</p>
+              </div>
+              <div class="computerBoatsRow" id="destroyer">
+                <p>Destroyer</p>
+                <p>1</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
+
     </div>
   </body>
 </html>
