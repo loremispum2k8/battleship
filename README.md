@@ -3,6 +3,8 @@
 You and the computer each have a fleet of ships — your goal is to sink all of the opponent’s ships before they sink yours.
 
 ![Boat positioning desktop](/screnshots/screenshot.png)
+![Boat positioning desktop not finished](/screnshots/lacks.png)
+![Boat positioning desktop finished](/screnshots/allPlaced.png)
 
 ## **Features**
 
