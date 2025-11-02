@@ -1081,6 +1081,14 @@ computerSquares.forEach((square)=>{
       console.log('missed')
       square.classList.add('missed')
       // Here we have useless coordonates
+      for(let row in computer.gameboard.nonCriticalShots){
+        for(let normalCoordonate of computer.gameboard.nonCriticalShots[row]){
+          if(normalCoordonate.join('') === square.id){
+            computer.gameboard.nonCriticalShots[row].splice(computer.gameboard.nonCriticalShots[row].indexOf(normalCoordonate),1)
+            computer.gameboard.historyShots.push(normalCoordonate)
+          }
+        }
+      }
     }
   })
 })
