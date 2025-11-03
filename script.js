@@ -1039,9 +1039,10 @@ function placeComputerBoats(){
 computerSquares.forEach((square)=>{
   square.addEventListener('click',()=>{
     if(computer.gameboard.ships[square.getAttribute('ship-origin')]){
-      // Here we have critical coordonates only
+
       for(let coordonate of computer.gameboard.ships[square.getAttribute('ship-origin')].coordonates){
         if (coordonate.join('') === square.id){
+          
           let shipCoordonateIndex = computer.gameboard.ships[square.getAttribute('ship-origin')].coordonates.indexOf(coordonate)
           computer.gameboard.ships[square.getAttribute('ship-origin')].coordonates.splice(shipCoordonateIndex,1)
           
@@ -1050,7 +1051,6 @@ computerSquares.forEach((square)=>{
 
           computer.gameboard.ships[square.getAttribute('ship-origin')].hits.push(coordonate)
           computer.gameboard.ships[square.getAttribute('ship-origin')].hit();
-          console.log(computer.gameboard.ships[square.getAttribute('ship-origin')].isSunk())
 
           if(computer.gameboard.ships[square.getAttribute('ship-origin')].isSunk()){
             console.log('destroyed all ships', computer.gameboard.ships[square.getAttribute('ship-origin')].hits)
@@ -1075,7 +1075,7 @@ computerSquares.forEach((square)=>{
         }
       }
       if(computer.gameboard.areAllBoatsDestroyed()){
-        playingContainer.style.display = 'none'
+        alert('You won')
       }
     }else{
       console.log('missed')
@@ -1122,26 +1122,65 @@ function shuffle(arr){
   }
   return arr
 }
-
 let shuffledArray = shuffle(moves)
 console.log(shuffledArray)
-function computerHitOnMe(){
 
-    mySquares.forEach(square=>{
-      if(square.id === shuffledArray[0].join('') && square.hasAttribute('ship-origin')){
-        square.style.backgroundColor = 'red'
-      }else if(square.id === shuffledArray[0].join('') && !(square.hasAttribute('ship-origin'))){
-        square.style.backgroundColor = 'green'
+
+
+computerSquares.forEach(computerSquare=>{
+  computerSquare.addEventListener('click',()=>{
+    console.log('click')
+
+    console.log(shuffledArray[0])
+      for(let square of mySquares){
+        if(square.id === shuffledArray[0].join('')){
+          if(square.hasAttribute('ship-origin')){
+
+            let shipCoordonateIndex = me.gameboard.ships[square.getAttribute('ship-origin')].coordonates.indexOf(shuffledArray[0])
+            me.gameboard.ships[square.getAttribute('ship-origin')].coordonates.splice(shipCoordonateIndex,1)
+
+            let CritticalCoordonateIndex = me.gameboard.criticalShots.indexOf(shuffledArray[0])
+            me.gameboard.criticalShots.splice(CritticalCoordonateIndex,1)
+
+            me.gameboard.ships[square.getAttribute('ship-origin')].hits.push(shuffledArray[0])
+            me.gameboard.ships[square.getAttribute('ship-origin')].hit();
+
+            if(me.gameboard.ships[square.getAttribute('ship-origin')].isSunk()){
+              square.classList.add('destroyed')
+              mySquares.forEach(newSquare=>{
+                for(let coordonate of me.gameboard.ships[square.getAttribute('ship-origin')].hits){
+                  if(coordonate.join('') === newSquare.id && !newSquare.classList.contains('destroyed')){
+                    newSquare.classList.add('destroyed')
+                  }
+                }
+              })
+            }else{
+              console.log('hit')
+              square.classList.add('hit')
+            }
+            
+            if(me.gameboard.areAllBoatsDestroyed()){
+              alert('Computer won')
+            }
+            break
+          }else{
+            console.log('miss')
+            square.classList.add('missed')
+            for(let row in me.gameboard.nonCriticalShots){
+              for(let normalCoordonate of me.gameboard.nonCriticalShots[row]){
+                if(normalCoordonate.join('') === square.id){
+                  me.gameboard.nonCriticalShots[row].splice(me.gameboard.nonCriticalShots[row].indexOf(normalCoordonate),1)
+                  me.gameboard.historyShots.push(normalCoordonate)
+                }
+              }
+            }
+            break
+          }
+        }
       }
-    })
 
-    shuffledArray.shift();
-    console.log(shuffledArray)
-}
+      shuffledArray.shift()
 
-computerSquares.forEach(square=>{
-  square.addEventListener('click',()=>{
-    computerHitOnMe()
   })
 })
 

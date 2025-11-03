@@ -1,3 +1,2 @@
--> Make computer focus on possible moves when getting a hit and return moves
-   Make moves register on the map
-   Make moves change the me.gameboard
+   Make moves register on the map with animations: red, yellow, white just like computer hits
+-> Make computer hits affect me.gameboard (1039 - 1094)
