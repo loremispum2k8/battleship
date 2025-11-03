@@ -1123,16 +1123,27 @@ function shuffle(arr){
   return arr
 }
 
+let shuffledArray = shuffle(moves)
+console.log(shuffledArray)
 function computerHitOnMe(){
-  let shuffledArray = shuffle(moves)
 
-    for(let coordonate of shuffledArray){
-      mySquares.forEach(square=>{
-        if(square.id === coordonate.join('')){
-          square.style.backgroundColor = 'green'
-        }
-      })
-    }
+    mySquares.forEach(square=>{
+      if(square.id === shuffledArray[0].join('') && square.hasAttribute('ship-origin')){
+        square.style.backgroundColor = 'red'
+      }else if(square.id === shuffledArray[0].join('') && !(square.hasAttribute('ship-origin'))){
+        square.style.backgroundColor = 'green'
+      }
+    })
+
+    shuffledArray.shift();
+    console.log(shuffledArray)
 }
-computerHitOnMe()
+
+computerSquares.forEach(square=>{
+  square.addEventListener('click',()=>{
+    computerHitOnMe()
+  })
+})
+
+
 
