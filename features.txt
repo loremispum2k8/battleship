@@ -1,1 +1,3 @@
--> Add removal of basic moves from the computer arr
+-> Make computer focus on possible moves when getting a hit and return moves
+   Make moves register on the map
+   Make moves change the me.gameboard
