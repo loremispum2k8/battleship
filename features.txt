@@ -1,3 +1,2 @@
-
--->   Clear both players coordonates, ships, etc.
+--> Update media for phone
 

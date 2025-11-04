@@ -6,7 +6,9 @@ You and the computer each have a fleet of ships — your goal is to sink all of 
 ![Boat positioning desktop not finished](/screnshots/lacks.png)
 ![Boat positioning desktop finished](/screnshots/allPlaced.png)
 ![Boat play desktop](/screnshots/playing.png)
+![Boat play hits desktop](/screnshots/hits.png)
 ![Boat end desktop](/screnshots/end.png)
+
 
 ## **Features**
 
