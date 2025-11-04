@@ -17,12 +17,6 @@
     src: url(fonts/Inter_18pt-Regular.ttf);
 }
 
-body{
-    width: 100dvw;
-    height: 100dvh;  
-    position: relative; 
-}
-
 .placingContainer{
     opacity: 0;
     display: flex;
@@ -33,8 +27,6 @@ body{
     width: 100%;
     height: 100%;
 }
-
-
 
 .placingContainerMiddle{
     margin-left: -43px;
@@ -896,4 +888,161 @@ body{
     to{
         transform: scale(1);
     }
+}
+
+
+
+@media only screen and (max-width:1200px){
+
+.placingContainer{
+    height: 100%;
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.placingContainerMiddle{
+margin-left: 0px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.coordonateTitle{
+    font-size: 16px;
+}
+
+.placingContainerMiddle{
+    margin-left: 0px;
+    gap: 40px;
+}
+
+.placeCoordonatesCard{
+    padding: 20px;
+    width: 255px;
+}
+.coordonatesBoatName{
+    font-size: 12px;
+}
+.coordonatesRowInputs{
+    padding: 3px;
+    gap: 3px;
+}
+.coordonateInput{
+    width: 28px;
+    font-size: 12px;
+    height: 28px;
+}
+
+.mapCoordonate{
+    font-size: 12px;
+}
+.mapPlacingTopBottom .mapCoordonate{
+    text-align: center;
+    font-family: "InterRegular";
+    width: 10px;
+}
+.mapPlacingTopBottom{
+    width: 240px;
+}
+.mapPlacingMiddle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+.mapPlacingSide{
+    height: 240px;
+}
+.map-placing{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.square-placing{
+    height: 24px;
+    width: 24px;
+}
+.boatsTitle{
+    font-size: 16px;
+}
+.placeBoatsCard{
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 255px;
+    border-radius: 28px;
+    box-shadow: 0px 0px 0px 0.5px #B7B7B7;
+}
+.tableHeader{
+    font-size: 12px;
+}
+.tableRow {
+    font-size: 12px;
+}
+.placingDoneButton{
+    width: 90px;
+    height: 37px;
+}
+
+
+
+.playingContainer{
+    padding-top: 60px;
+    gap: 35px;
+}
+.playingContainerMaps{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+.me-square-placing,.computer-square-placing{
+    height: 24px;
+    width: 24px;
+}
+.middlePlayingContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+.myBoatsTitle,.computerTitle{
+    font-size: 16px;
+}
+
+.thankYouScreen{
+    padding: 80px 0px 20px 0px;
+    width: 100vw;
+    height: 100vh;
+}
+.endingMessage{
+    filter: blur(3px);
+    font-size: clamp(50px, 10vw, 60px);
+    color: #d0d0d0;
+}
+.endingMessage{
+    font-size: 50px;
+    text-align: center;
+    width: 80%;
+}
+.thankyoumsg{
+    font-size: 16px;
+    margin-bottom: -10px;
+}
+.thankYouGameTitle{
+    padding: 0px 20px;
+    font-size: clamp(20px,15vw,80px);
+}
+.thankyouButton{
+    font-size: 14px;
+    width: 110px;
+    height: 34px;
+}
+.gitName{
+    font-size: 16px;
+}
 }
