@@ -1,4 +1,3 @@
 
 -->   Clear both players coordonates, ships, etc.
 
-      Add gaming sections rows - yellow or red based on hitted or destroyed ships

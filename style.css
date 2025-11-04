@@ -879,3 +879,21 @@ body{
 .thankyouIcon:hover{
     filter: brightness(0);
 }
+
+.scaleUp{
+    animation: scaleUp 0.25s 1 ease-in forwards;
+}
+.scaleUpAgain{
+    animation: scaleUp 0.25s 1 ease-in forwards;
+}
+@keyframes scaleUp {
+    from{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    to{
+        transform: scale(1);
+    }
+}

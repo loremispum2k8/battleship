@@ -1055,6 +1055,14 @@ computerSquares.forEach((square)=>{
           if(computer.gameboard.ships[square.getAttribute('ship-origin')].isSunk()){
             console.log('destroyed all ships', computer.gameboard.ships[square.getAttribute('ship-origin')].hits)
             square.classList.add('destroyed')
+            computerBoatsRow.forEach(row=>{
+              if(row.id === square.getAttribute('ship-origin')){
+                row.style.border = '2px solid #E91316'
+                row.style.color = '#E91316'
+                row.classList.add('scaleUpAgain')
+                row.children[1].textContent = 0
+              }
+            })
             
             computerSquares.forEach((newSquare)=>{
               for(let coordonate of computer.gameboard.ships[square.getAttribute('ship-origin')].hits){
@@ -1069,6 +1077,13 @@ computerSquares.forEach((square)=>{
           }else{
             console.log('hit')
             square.classList.add('hit')
+            computerBoatsRow.forEach(row=>{
+              if(row.id === square.getAttribute('ship-origin')){
+                row.style.border = '2px solid #E9B013'
+                row.style.color = '#E9B013'
+                row.classList.add('scaleUp')
+              }
+            })
           }
 
           break;
@@ -1146,12 +1161,27 @@ computerSquares.forEach(computerSquare=>{
                 for(let coordonate of me.gameboard.ships[square.getAttribute('ship-origin')].hits){
                   if(coordonate.join('') === newSquare.id && !newSquare.classList.contains('destroyed')){
                     newSquare.classList.add('destroyed')
+                    myBoatsRow.forEach(row=>{
+                      if(row.id === square.getAttribute('ship-origin')){
+                        row.style.border = '2px solid #E91316'
+                        row.style.color = '#E91316'
+                        row.classList.add('scaleUpAgain')
+                        row.children[1].textContent = 0
+                      }
+                    })
                   }
                 }
               })
             }else{
               console.log('hit')
               square.classList.add('hit')
+              myBoatsRow.forEach(row=>{
+                  if(row.id === square.getAttribute('ship-origin')){
+                    row.style.border = '2px solid #E9B013'
+                    row.style.color = '#E9B013'
+                    row.classList.add('scaleUp')
+                  }
+              })
             }
             
             if(me.gameboard.areAllBoatsDestroyed()){
@@ -1196,8 +1226,13 @@ function endingScreen(msg1,msg2,msg3){
   },1000)
 }
 
+let computerBoatsRow = document.querySelectorAll('.computerBoatsRow')
+let myBoatsRow = document.querySelectorAll('.myBoatsRow')
+
+
 let thankyouButton = document.querySelector('.thankyouButton')
 thankyouButton.addEventListener('click',()=>{
-
+  thankYouScreen.classList.add('dissapear')
+  thankYouScreen.classList.remove('appear')
+  setTimeout(window.location.reload(),1100)
 })
-
