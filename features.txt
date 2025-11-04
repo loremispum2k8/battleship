@@ -1,2 +1,4 @@
-   Make moves register on the map with animations: red, yellow, white just like computer hits
--> Make computer hits affect me.gameboard (1039 - 1094)
+
+-->   Clear both players coordonates, ships, etc.
+
+      Add gaming sections rows - yellow or red based on hitted or destroyed ships

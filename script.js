@@ -1075,7 +1075,7 @@ computerSquares.forEach((square)=>{
         }
       }
       if(computer.gameboard.areAllBoatsDestroyed()){
-        alert('You won')
+        endingScreen('Congrats','You','Won')
       }
     }else{
       console.log('missed')
@@ -1109,8 +1109,6 @@ function getAllMyMoves(){
   return myMoves;
 }
 
-
-
 let moves = [["A","1"],["A","2"],["A","3"],["A","4"],["A","5"],["B","1"],["B","2"],["B","3"],["B","4"],["C","1"],["C","2"],["C","3"],["D","1"],["D","2"],["D","3"],["F","1"],["F","2"],["E","1"],["G","1"],["H","1"],["I","1"],["J","1"],["E","2"],["G","2"],["H","2"],["I","2"],["J","2"],["E","3"],["F","3"],["G","3"],["H","3"],["I","3"],["J","3"],["C","4"],["D","4"],["E","4"],["F","4"],["G","4"],["H","4"],["I","4"],["J","4"],["B","5"],["C","5"],["D","5"],["E","5"],["F","5"],["G","5"],["H","5"],["I","5"],["J","5"],["A","6"],["B","6"],["C","6"],["D","6"],["E","6"],["F","6"],["G","6"],["H","6"],["I","6"],["J","6"],["A","7"],["B","7"],["C","7"],["D","7"],["E","7"],["F","7"],["G","7"],["H","7"],["I","7"],["J","7"],["A","8"],["B","8"],["C","8"],["D","8"],["E","8"],["F","8"],["G","8"],["H","8"],["I","8"],["J","8"],["A","9"],["B","9"],["C","9"],["D","9"],["E","9"],["F","9"],["G","9"],["H","9"],["I","9"],["J","9"],["A","10"],["B","10"],["C","10"],["D","10"],["E","10"],["F","10"],["G","10"],["H","10"],["I","10"],["J","10"]]
 
 function shuffle(arr){
@@ -1123,9 +1121,6 @@ function shuffle(arr){
   return arr
 }
 let shuffledArray = shuffle(moves)
-console.log(shuffledArray)
-
-
 
 computerSquares.forEach(computerSquare=>{
   computerSquare.addEventListener('click',()=>{
@@ -1160,7 +1155,7 @@ computerSquares.forEach(computerSquare=>{
             }
             
             if(me.gameboard.areAllBoatsDestroyed()){
-              alert('Computer won')
+              endingScreen('Sorry','You','Lost')
             }
             break
           }else{
@@ -1184,5 +1179,25 @@ computerSquares.forEach(computerSquare=>{
   })
 })
 
+let thankYouScreen = document.querySelector('.thankYouScreen')
+function endingScreen(msg1,msg2,msg3){
+  let endingMessage = document.querySelector('.endingMessage')
+  endingMessage.innerHTML = `${msg1}, <span class="you">${msg2}</span> ${msg3}`
+  playingContainer.classList.remove('appear')
+  placingContainer.classList.remove('appear')
+  playingContainer.classList.add('dissapear')
+  myBoatsContainer.classList.add('dissapearLeft')
+  computerBoatsContainer.classList.add('dissapearRight')
+  playingGameTitle.classList.add('dissapearTop')
+  
+  setTimeout(()=>{
+    thankYouScreen.style.display = 'flex'
+    thankYouScreen.classList.add('appear')
+  },1000)
+}
 
+let thankyouButton = document.querySelector('.thankyouButton')
+thankyouButton.addEventListener('click',()=>{
+
+})
 
